@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_Buffer" Id="{b4aa607f-9d94-4d0a-a8e1-b05f46e7ae4a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Buffer
+
+VAR
+	BlankBuffer : ARRAY[1..GVL.Buffer_Size] OF BOOL; //
+	
+	
+	IsEmpty : BOOL;
+END_VAR
+
+
+VAR PERSISTENT
+	Places : ARRAY[1..GVL.Buffer_Size] OF BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+IsEmpty := MEMCMP(ADR(BlankBuffer),ADR(PLACES),SIZEOF(BlankBuffer)) = 0; //TRUE if Buffer has zero parts]]></ST>
+    </Implementation>
+    <Method Name="M_ClearBuffer" Id="{b6ac521c-be4d-46de-b385-0b949ba5f652}">
+      <Declaration><![CDATA[METHOD M_ClearBuffer : BOOL
+VAR_INPUT
+END_VAR
+
+VAR 
+	 i : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+FOR i := 1 TO GVL.Buffer_Size DO 
+	Places[i] := FALSE;
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_FindFirstAvailablePos" Id="{715b6a9c-f49c-4f6c-be8c-49094d2f2a8d}">
+      <Declaration><![CDATA[METHOD PUBLIC M_FindFirstAvailablePos : INT
+
+VAR 
+	 i : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 1 TO GVL.Buffer_Size DO
+    IF NOT Places[i] THEN
+        M_FindFirstAvailablePos := i;
+        RETURN;
+    END_IF
+END_FOR
+M_FindFirstAvailablePos := 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_PlacePart" Id="{8d6c9ac0-d716-45f6-ab80-315fa0726efc}">
+      <Declaration><![CDATA[METHOD M_PlacePart : BOOL
+VAR_INPUT
+	Select_Index : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Places[Select_Index] := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_Buffer">
+      <LineId Id="15" Count="1" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Buffer.M_ClearBuffer">
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="11" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_Buffer.M_FindFirstAvailablePos">
+      <LineId Id="6" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Buffer.M_PlacePart">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
