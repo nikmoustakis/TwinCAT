@@ -10,8 +10,8 @@ VAR
     Buffer_1 : FB_Buffer;
     Buffer_2 : FB_Buffer;
 	
-	Mover_1  : FB_Mover;
-	Mover_2  : FB_Mover;
+	Mover_1  : FB_Mover_1;
+	Mover_2  : FB_Mover_2;
 	
 	Mover1_State : INT; // 0 = Idle, 1 = Moving to Pick, 2 = Picking, 3 = Moving to Buffer, 4 = Placing
     Mover2_State : INT; // 0 = Idle, 1 = Moving to Buffer, 2 = Picking from Buffer, 3 = Moving to Place, 4 = Placing
@@ -75,34 +75,11 @@ CASE Mover_1.State OF
 		
 	
 	E_MoverFixedState.InPlacedPos:
-			Mover_1.M_PlacePart();
+		Mover_1.M_PlacePart();
+			
+	E_MoverFixedState.PartPlaced:
+		Mover_1.M_MoveToPickPos();
 		
-		//IF Buffer_1.IsEmpty AND (Mover_2.State 
-	//IF /* picking complete */ THEN
-//        // Decide which buffer to use, but only if Mover 2 is not going to use it
-//        TargetPosition1 := 0;
-//        IF Mover2_State = 0 OR (Mover2_State >= 3 AND TargetBuffer2 <> 'A') THEN
-//            TargetPosition1 := FindFirstAvailablePosition(BufferA_Flag);
-//            IF TargetPosition1 <> 0 THEN
-//                TargetBuffer1 := 'A';
-//                BufferA_Flag[TargetPosition1] := TRUE;
-//            END_IF
-//        END_IF
-//        IF TargetPosition1 = 0 AND (Mover2_State = 0 OR (Mover2_State >= 3 AND TargetBuffer2 <> 'B')) THEN
-//            TargetPosition1 := FindFirstAvailablePosition(BufferB_Flag);
-//            IF TargetPosition1 <> 0 THEN
-//                TargetBuffer1 := 'B';
-//                BufferB_Flag[TargetPosition1] := TRUE;
-//            END_IF
-//        END_IF
-
-//        // If no position is available, wait
-//        IF TargetPosition1 = 0 THEN
-//            RETURN;
-//        END_IF
-        
-//        Mover1_State := 3; // Change state to Moving to Buffer
-//    END_IF
 
 END_CASE
 
@@ -195,10 +172,8 @@ END_CASE
       <LineId Id="187" Count="3" />
       <LineId Id="167" Count="0" />
       <LineId Id="176" Count="0" />
-      <LineId Id="191" Count="1" />
-      <LineId Id="168" Count="1" />
-      <LineId Id="107" Count="23" />
-      <LineId Id="106" Count="0" />
+      <LineId Id="191" Count="4" />
+      <LineId Id="168" Count="0" />
       <LineId Id="101" Count="0" />
       <LineId Id="99" Count="0" />
       <LineId Id="84" Count="0" />
