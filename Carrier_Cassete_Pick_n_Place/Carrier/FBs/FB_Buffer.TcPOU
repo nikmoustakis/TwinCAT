@@ -5,9 +5,12 @@
 
 VAR
 	BlankBuffer : ARRAY[1..GVL.Buffer_Size] OF BOOL; //
-	
+	FullBuffer  : ARRAY[1..GVL.Buffer_Size] OF BOOL;
 	
 	IsEmpty : BOOL;
+	IsFull  : BOOL;
+	
+	Init : BOOL := TRUE;
 END_VAR
 
 
@@ -16,9 +19,14 @@ VAR PERSISTENT
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
+      <ST><![CDATA[IF Init THEN 
+ MEMSET(ADR(FullBuffer),16#1,SIZEOF(FullBuffer));
+Init := FALSE;
+END_IF
 
-IsEmpty := MEMCMP(ADR(BlankBuffer),ADR(PLACES),SIZEOF(BlankBuffer)) = 0; //TRUE if Buffer has zero parts]]></ST>
+IsEmpty := MEMCMP(ADR(BlankBuffer),ADR(PLACES),SIZEOF(BlankBuffer)) = 0; //TRUE if Buffer has zero parts
+
+IsFull := MEMCMP(ADR(FullBuffer),ADR(PLACES),SIZEOF(FullBuffer)) = 0; ]]></ST>
     </Implementation>
     <Method Name="M_ClearBuffer" Id="{b6ac521c-be4d-46de-b385-0b949ba5f652}">
       <Declaration><![CDATA[METHOD M_ClearBuffer : BOOL
@@ -80,8 +88,13 @@ END_VAR]]></Declaration>
       </Implementation>
     </Method>
     <LineIds Name="FB_Buffer">
-      <LineId Id="15" Count="1" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="33" Count="1" />
+      <LineId Id="16" Count="0" />
       <LineId Id="9" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="36" Count="0" />
     </LineIds>
     <LineIds Name="FB_Buffer.M_ClearBuffer">
       <LineId Id="6" Count="0" />

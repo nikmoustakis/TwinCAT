@@ -21,7 +21,8 @@ VAR
 	//Simulation Timer 
 	Sim_Time : TON ;
 	
-	TargetBuffer_Is_1 : BOOL;          //Which buffer is going to be used
+	TargetBuffer_Is_1 : BOOL;          // Mover is going to use Buffer 1
+	TargetBuffer_Is_2 : BOOL;          // Mover is going to use Buffer 2
 	TargetPosition_Buffer : INT;    // Position in y axis of Buffer 
 END_VAR
 ]]></Declaration>
@@ -84,7 +85,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TargetBuffer_Is_1 := TRUE;]]></ST>
+        <ST><![CDATA[TargetBuffer_Is_1 := TRUE;
+TargetBuffer_Is_2 := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_TargetBuffer_Is_2" Id="{a1848d1e-a972-4da5-85ac-2bdbac856f6b}" FolderPath="Buffer Methods\">
@@ -93,7 +95,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TargetBuffer_Is_1 := FALSE;]]></ST>
+        <ST><![CDATA[TargetBuffer_Is_1 := FALSE;
+TargetBuffer_Is_2 := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_TargetPosition_Buffer" Id="{0c55cd5a-f0ee-4089-926d-509c15dac085}">
@@ -141,8 +144,10 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_Mover.M_TargetBuffer_Is_1">
       <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_Mover.M_TargetBuffer_Is_2">
+      <LineId Id="12" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Mover.P_TargetPosition_Buffer.Get">

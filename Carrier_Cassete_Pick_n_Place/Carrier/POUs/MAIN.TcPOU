@@ -50,27 +50,30 @@ CASE Mover_1.State OF
 		
 	E_MoverFixedState.PartPicked:
 	
-		IF (Mover_2.State = E_MoverFixedState.Idle) OR ((Mover_2.State <> E_MoverFixedState.Idle) AND (Mover_2.TargetBuffer_Is_1 = FALSE)) THEN 
+	
+		Mover_1.P_TargetPosition_Buffer := 0; //Initialize Buffer Position to zero 
+	
+		IF Mover_2.TargetBuffer_Is_2  THEN 
 			
-				Mover_1.P_TargetPosition_Buffer := Buffer_1.M_Find_First_Empty_Pos(); //Find position available position in the buffer
+				Mover_1.P_TargetPosition_Buffer := Buffer_1.M_Find_First_Empty_Pos(); //Find  available position in the buffer
 				
 				IF Mover_1.TargetPosition_Buffer <> 0 THEN 
 					Mover_1.M_TargetBuffer_Is_1();   //Mover_1 will go to deliver part to Buffer_1 since either Mover_2 is idle or is busy with Buffer_B
 				END_IF
-		
-		END_IF
-		
-		IF  (Mover_1.TargetPosition_Buffer = 0 ) AND  ((Mover_2.State = E_MoverFixedState.Idle) OR ((Mover_2.State <> E_MoverFixedState.Idle) AND (Mover_2.TargetBuffer_Is_1 = FALSE))) THEN 
+				
+		ELSIF (Mover_2.State = E_MoverFixedState.Idle) THEN 
 			
 				Mover_1.P_TargetPosition_Buffer := Buffer_2.M_Find_First_Empty_Pos(); //Find position available position in the buffer
-				
+		
 				IF Mover_1.TargetPosition_Buffer <> 0 THEN 
 					Mover_1.M_TargetBuffer_Is_2();   //Mover_1 will go to deliver part to Buffer_1 since either Mover_2 is idle or is busy with Buffer_B
 				END_IF
 		
 		END_IF
 		
-		IF  Mover_1.TargetPosition_Buffer <> 0 THEN 
+	
+		
+		IF  Mover_1.TargetPosition_Buffer <> 0 THEN //If there is valid buffer target position, pass buffer type and the buffer position for the mover to place the part
 			Mover_1.M_MoveToPlacePos(Buffer_1_InUse := Mover_1.TargetBuffer_Is_1, Buffer_Pos := Mover_1.TargetPosition_Buffer   ); //Pseudo code to send the mover to the respective buffer position (buffer type + buffer position)
 		END_IF
 		
@@ -198,13 +201,16 @@ END_IF]]></ST>
       <LineId Id="102" Count="0" />
       <LineId Id="100" Count="0" />
       <LineId Id="104" Count="1" />
+      <LineId Id="292" Count="0" />
+      <LineId Id="290" Count="1" />
       <LineId Id="155" Count="1" />
       <LineId Id="171" Count="4" />
+      <LineId Id="293" Count="3" />
       <LineId Id="160" Count="0" />
+      <LineId Id="298" Count="2" />
+      <LineId Id="297" Count="0" />
       <LineId Id="157" Count="0" />
-      <LineId Id="177" Count="0" />
-      <LineId Id="179" Count="7" />
-      <LineId Id="178" Count="0" />
+      <LineId Id="177" Count="1" />
       <LineId Id="187" Count="3" />
       <LineId Id="167" Count="0" />
       <LineId Id="176" Count="0" />
