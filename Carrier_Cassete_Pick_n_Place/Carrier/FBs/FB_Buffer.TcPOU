@@ -36,8 +36,8 @@ FOR i := 1 TO GVL.Buffer_Size DO
 END_FOR]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_FindFirstAvailablePos" Id="{715b6a9c-f49c-4f6c-be8c-49094d2f2a8d}">
-      <Declaration><![CDATA[METHOD PUBLIC M_FindFirstAvailablePos : INT
+    <Method Name="M_Find_First_Empty_Pos" Id="{715b6a9c-f49c-4f6c-be8c-49094d2f2a8d}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Find_First_Empty_Pos : INT
 
 VAR 
 	 i : INT;
@@ -46,11 +46,28 @@ END_VAR
       <Implementation>
         <ST><![CDATA[FOR i := 1 TO GVL.Buffer_Size DO
     IF NOT Places[i] THEN
-        M_FindFirstAvailablePos := i;
+        M_Find_First_Empty_Pos := i;
         RETURN;
     END_IF
 END_FOR
-M_FindFirstAvailablePos := 0;]]></ST>
+M_Find_First_Empty_Pos := 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Find_First_Occupied_Pos" Id="{868e29bc-331d-4a14-8fc5-450054de381a}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Find_First_Occupied_Pos : INT
+
+VAR 
+	 i : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 1 TO GVL.Buffer_Size DO
+    IF  Places[i] THEN
+        M_Find_First_Occupied_Pos := i;
+        RETURN;
+    END_IF
+END_FOR
+M_Find_First_Occupied_Pos := 0;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_PlacePart" Id="{8d6c9ac0-d716-45f6-ab80-315fa0726efc}">
@@ -71,7 +88,11 @@ END_VAR]]></Declaration>
       <LineId Id="5" Count="0" />
       <LineId Id="11" Count="1" />
     </LineIds>
-    <LineIds Name="FB_Buffer.M_FindFirstAvailablePos">
+    <LineIds Name="FB_Buffer.M_Find_First_Empty_Pos">
+      <LineId Id="22" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Buffer.M_Find_First_Occupied_Pos">
       <LineId Id="6" Count="5" />
       <LineId Id="5" Count="0" />
     </LineIds>
