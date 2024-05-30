@@ -21,7 +21,8 @@ VAR
     TargetPosition2 : INT; // Position in the buffer for Mover 2
 	
 	
-	ClearBuff : BOOL;
+	ClearBuffer_1 : BOOL;
+	ClearBuffer_2 : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -53,7 +54,7 @@ CASE Mover_1.State OF
 	
 		Mover_1.P_TargetPosition_Buffer := 0; //Initialize Buffer Position to zero 
 	
-		IF Mover_2.TargetBuffer_Is_2  THEN 
+		IF Mover_2.TargetBuffer_Is_2  OR  (Mover_2.State = E_MoverFixedState.Idle) AND Buffer_2.IsFull  THEN 
 			
 				Mover_1.P_TargetPosition_Buffer := Buffer_1.M_Find_First_Empty_Pos(); //Find  available position in the buffer
 				
@@ -61,13 +62,14 @@ CASE Mover_1.State OF
 					Mover_1.M_TargetBuffer_Is_1();   //Mover_1 will go to deliver part to Buffer_1 since either Mover_2 is idle or is busy with Buffer_B
 				END_IF
 				
-		ELSIF (Mover_2.State = E_MoverFixedState.Idle) THEN 
+		ELSIF (Mover_2.State = E_MoverFixedState.Idle)    THEN 
 			
 				Mover_1.P_TargetPosition_Buffer := Buffer_2.M_Find_First_Empty_Pos(); //Find position available position in the buffer
 		
 				IF Mover_1.TargetPosition_Buffer <> 0 THEN 
 					Mover_1.M_TargetBuffer_Is_2();   //Mover_1 will go to deliver part to Buffer_1 since either Mover_2 is idle or is busy with Buffer_B
 				END_IF
+		
 		
 		END_IF
 		
@@ -93,36 +95,36 @@ CASE Mover_1.State OF
 END_CASE
 
 
-CASE Mover_2.State OF 
-	E_MoverFixedState.Idle:
-		IF Mover_1.TargetBuffer_Is_1 THEN //If Mover_1 is in Buffer 1 Mover_2 can pick part from Buffer_2
+//CASE Mover_2.State OF 
+//	E_MoverFixedState.Idle:
+//		IF Mover_1.TargetBuffer_Is_1 THEN //If Mover_1 is in Buffer 1 Mover_2 can pick part from Buffer_2
 			
-			IF NOT Buffer_2.IsEmpty THEN
-				Mover_2.P_TargetPosition_Buffer := Buffer_2.M_Find_First_Occupied_Pos();
+//			IF NOT Buffer_2.IsEmpty THEN
+//				Mover_2.P_TargetPosition_Buffer := Buffer_2.M_Find_First_Occupied_Pos();
 				
-				IF Mover_2.TargetPosition_Buffer <> 0 THEN
-					Mover_2.M_TargetBuffer_Is_2();
-					Mover_2.M_MoveToPickPos(Buffer_1_InUse:= FALSE , Buffer_Pos := Mover_2.TargetPosition_Buffer );
+//				IF Mover_2.TargetPosition_Buffer <> 0 THEN
+//					Mover_2.M_TargetBuffer_Is_2();
+//					Mover_2.M_MoveToPickPos(Buffer_1_InUse:= FALSE , Buffer_Pos := Mover_2.TargetPosition_Buffer );
 				
-				END_IF
+//				END_IF
 		
-	    	END_IF
+//	    	END_IF
 			
-		ELSIF (Mover_1.State <= E_MoverFixedState.PartPicked) THEN //If mover
-			IF NOT Buffer_1.IsEmpty THEN
-				Mover_2.P_TargetPosition_Buffer := Buffer_1.M_Find_First_Occupied_Pos();
+//		ELSIF (Mover_1.State <= E_MoverFixedState.PartPicked) THEN //If mover
+//			IF NOT Buffer_1.IsEmpty THEN
+//				Mover_2.P_TargetPosition_Buffer := Buffer_1.M_Find_First_Occupied_Pos();
 				
-				IF Mover_2.TargetPosition_Buffer <> 0 THEN
-					Mover_2.M_TargetBuffer_Is_1();
-					Mover_2.M_MoveToPickPos(Buffer_1_InUse:= TRUE , Buffer_Pos := Mover_2.TargetPosition_Buffer );
+//				IF Mover_2.TargetPosition_Buffer <> 0 THEN
+//					Mover_2.M_TargetBuffer_Is_1();
+//					Mover_2.M_MoveToPickPos(Buffer_1_InUse:= TRUE , Buffer_Pos := Mover_2.TargetPosition_Buffer );
 				
-				END_IF 
+//				END_IF 
 				
-			END_IF
-		END_IF	
+//			END_IF
+//		END_IF	
 		
-		E_MoverFixedState.InPickedPos:
-END_CASE
+//		E_MoverFixedState.InPickedPos:
+//END_CASE
 
 //IF Mover2_State = 1 THEN // Mover 2 moving to buffer
 //    TargetPosition2 := 0;
@@ -172,10 +174,15 @@ END_CASE
 //END_IF
 
 
-IF ClearbUFF THEN 
+IF ClearBuffer_1 THEN 
 	Buffer_1.M_ClearBuffer();
+	ClearBuffer_1 := FALSE;
+END_IF
+
+
+IF ClearBuffer_2 THEN 
 	Buffer_2.M_ClearBuffer();
-	ClearBuff := FALSE;
+	ClearBuffer_2 := FALSE;
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
@@ -207,7 +214,7 @@ END_IF]]></ST>
       <LineId Id="171" Count="4" />
       <LineId Id="293" Count="3" />
       <LineId Id="160" Count="0" />
-      <LineId Id="298" Count="2" />
+      <LineId Id="298" Count="3" />
       <LineId Id="297" Count="0" />
       <LineId Id="157" Count="0" />
       <LineId Id="177" Count="1" />
@@ -247,8 +254,10 @@ END_IF]]></ST>
       <LineId Id="202" Count="0" />
       <LineId Id="2" Count="0" />
       <LineId Id="203" Count="0" />
-      <LineId Id="205" Count="1" />
+      <LineId Id="206" Count="0" />
       <LineId Id="204" Count="0" />
+      <LineId Id="304" Count="4" />
+      <LineId Id="303" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
