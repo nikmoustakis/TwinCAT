@@ -38,17 +38,18 @@ END_VAR
         <ST><![CDATA[Out_Blower := FALSE;
 Out_Vacuum := TRUE;
 
-Sim_Time(IN := Out_Vacuum, PT := T#100MS);
+Sim_Time(IN := Out_Vacuum, PT := T#500MS);
 
 
 In_VacuumON := Sim_Time.Q; //We assume when Out_vacuum is TRUE, In_Vacuum feedback becomes true after 100ms
 
-State := E_MoverTransitionState.Picking;
+//State := E_MoverTransitionState.Picking;
 
 
 
 IF In_VacuumON THEN 
 	State := E_MoverFixedState.PartPicked;
+	Sim_Time(IN := FALSE);
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -62,17 +63,18 @@ END_VAR
         <ST><![CDATA[Out_Blower := TRUE;
 Out_Vacuum := FALSE;
 
-Sim_Time(IN := NOT Out_Vacuum, PT := T#100MS);
+Sim_Time(IN := NOT Out_Vacuum, PT := T#500MS);
 
 
 In_VacuumON := Sim_Time.Q; //We assume when Out_vacuum is FALSE, In_Vacuum feedback becomes FALSE after 100ms
 
-State := E_MoverTransitionState.Placing;
+//State := E_MoverTransitionState.Placing;
 
 
 
 IF NOT In_VacuumON THEN 
 	State := E_MoverFixedState.PartPlaced;
+	Sim_Time(IN := FALSE);
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -126,12 +128,15 @@ END_VAR
       <LineId Id="6" Count="0" />
       <LineId Id="16" Count="4" />
       <LineId Id="15" Count="0" />
-      <LineId Id="25" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="26" Count="0" />
     </LineIds>
     <LineIds Name="FB_Mover.M_PlacePart">
       <LineId Id="28" Count="2" />
       <LineId Id="43" Count="4" />
       <LineId Id="36" Count="5" />
+      <LineId Id="52" Count="0" />
       <LineId Id="6" Count="0" />
     </LineIds>
     <LineIds Name="FB_Mover.M_TargetBuffer_Is_1">

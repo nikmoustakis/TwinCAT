@@ -21,7 +21,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[//If Mover1 then PickFromCassette; if Mover2  PickFromBuffer
 
-State := E_MoverTransitionState.Picking;
+//State := E_MoverTransitionState.Picking;
 
 
 Sim_Time(IN := TRUE, PT := T#1S);
@@ -37,7 +37,7 @@ END_IF]]></ST>
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[//If Mover1 then PlaceToCarrier; if Mover2  PlaceToBuffer
-State := E_MoverTransitionState.Placing;
+//State := E_MoverTransitionState.Placing;
 
 
 Sim_Time(IN := TRUE, PT := T#1S);

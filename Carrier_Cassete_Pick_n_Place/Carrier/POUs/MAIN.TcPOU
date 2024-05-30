@@ -80,6 +80,11 @@ CASE Mover_1.State OF
 	E_MoverFixedState.PartPlaced:
 		Mover_1.M_MoveToPickPos();
 		
+		IF Mover_1.TargetBuffer_Is_1 THEN 
+			Buffer_1.M_PlacePart(Mover_1.TargetPosition_Buffer);
+		ELSE 
+			Buffer_2.M_PlacePart(Mover_1.TargetPosition_Buffer);
+		END_IF
 
 END_CASE
 
@@ -174,6 +179,9 @@ END_CASE
       <LineId Id="176" Count="0" />
       <LineId Id="191" Count="4" />
       <LineId Id="168" Count="0" />
+      <LineId Id="196" Count="1" />
+      <LineId Id="199" Count="1" />
+      <LineId Id="198" Count="0" />
       <LineId Id="101" Count="0" />
       <LineId Id="99" Count="0" />
       <LineId Id="84" Count="0" />
