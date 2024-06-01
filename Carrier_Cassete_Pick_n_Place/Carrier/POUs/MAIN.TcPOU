@@ -56,7 +56,7 @@ CASE Mover_1.State OF
 	
 		Mover_1.P_TargetPosition_Buffer := 0; //Initialize Buffer Position to zero 
 	
-		IF Mover_2.TargetBuffer_Is_2  OR  (Mover_2.State = E_MoverFixedState.Idle) AND Buffer_2.IsFull  THEN 
+		IF (Mover_2.TargetBuffer_Is_2 OR  (Mover_2.State = E_MoverFixedState.Idle)) AND NOT Buffer_1.IsFull  THEN 
 			
 				Mover_1.P_TargetPosition_Buffer := Buffer_1.M_Find_First_Empty_Pos(); //Find  available position in the buffer
 				
@@ -64,13 +64,14 @@ CASE Mover_1.State OF
 					Mover_1.M_TargetBuffer_Is_1();   //Mover_1 will go to deliver part to Buffer_1 since either Mover_2 is idle or is busy with Buffer_B
 				END_IF
 				
-		ELSIF (Mover_2.State = E_MoverFixedState.Idle)    THEN 
+		ELSIF ((Mover_2.State = E_MoverFixedState.Idle) AND NOT Buffer_2.IsFull)    THEN 
 			
 				Mover_1.P_TargetPosition_Buffer := Buffer_2.M_Find_First_Empty_Pos(); //Find position available position in the buffer
 		
 				IF Mover_1.TargetPosition_Buffer <> 0 THEN 
 					Mover_1.M_TargetBuffer_Is_2();   //Mover_1 will go to deliver part to Buffer_1 since either Mover_2 is idle or is busy with Buffer_B
 				END_IF
+		
 		
 		
 		END_IF
@@ -89,9 +90,9 @@ CASE Mover_1.State OF
 		Mover_1.M_MoveToPickPos();
 		
 		IF Mover_1.TargetBuffer_Is_1 THEN 
-			Buffer_1.M_PlacePart(Mover_1.TargetPosition_Buffer);
+			Buffer_1.M_PlacePartInBuffer(Mover_1.TargetPosition_Buffer);
 		ELSE 
-			Buffer_2.M_PlacePart(Mover_1.TargetPosition_Buffer);
+			Buffer_2.M_PlacePartInBuffer(Mover_1.TargetPosition_Buffer);
 		END_IF
 
 END_CASE
@@ -264,6 +265,7 @@ END_IF]]></ST>
       <LineId Id="293" Count="3" />
       <LineId Id="160" Count="0" />
       <LineId Id="298" Count="3" />
+      <LineId Id="381" Count="0" />
       <LineId Id="297" Count="0" />
       <LineId Id="157" Count="0" />
       <LineId Id="177" Count="1" />

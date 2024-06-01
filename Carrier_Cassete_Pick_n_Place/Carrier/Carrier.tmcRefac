@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Refactors>
+  <Renames>
+    <RenamedType>
+      <Type guid="8d6c9ac0-d716-45f6-ab80-315fa0726efc">M_PLACEPART</Type>
+      <From>M_PlacePart</From>
+      <To>M_PlacePartInBuffer</To>
+    </RenamedType>
+  </Renames>
+</Refactors>
