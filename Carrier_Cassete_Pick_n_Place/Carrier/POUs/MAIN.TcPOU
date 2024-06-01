@@ -95,6 +95,26 @@ CASE Mover_1.State OF
 END_CASE
 
 
+CASE Mover_2.State OF 
+	
+	E_MoverFixedState.Idle:
+	
+		IF Mover_1.TargetBuffer_Is_1 THEN //If Mover_1 is in Buffer_1 then Mover_2 can pick part from Buffer_2 with no COllision Risk
+			IF NOT Buffer_2.IsEmpty THEN 
+				Mover_2.P_TargetPosition_Buffer := Buffer_2.M_Find_First_Occupied_Pos(); //If Buffer_2 has at least one part, find first available location
+			
+				IF Mover_2.TargetPosition_Buffer <> 0 THEN //If Buffer returns available valid position ( no zero) then 
+					Mover_2.M_TargetBuffer_Is_2();         //set Buffer_2 as target buffer and set to the Mover_2 the position of the buffer 
+					Mover_2.M_MoveToPickPos(Buffer_1_InUse:= FALSE , Buffer_Pos := Mover_2.TargetPosition_Buffer );
+				
+				END_IF
+			END_IF
+		ELSIF   THEN
+			
+		
+		END_IF
+
+END_CASE
 //CASE Mover_2.State OF 
 //	E_MoverFixedState.Idle:
 //		IF Mover_1.TargetBuffer_Is_1 THEN //If Mover_1 is in Buffer 1 Mover_2 can pick part from Buffer_2
@@ -229,7 +249,22 @@ END_IF]]></ST>
       <LineId Id="101" Count="0" />
       <LineId Id="99" Count="0" />
       <LineId Id="207" Count="0" />
+      <LineId Id="332" Count="0" />
       <LineId Id="255" Count="0" />
+      <LineId Id="333" Count="0" />
+      <LineId Id="336" Count="0" />
+      <LineId Id="338" Count="1" />
+      <LineId Id="337" Count="0" />
+      <LineId Id="340" Count="1" />
+      <LineId Id="344" Count="0" />
+      <LineId Id="347" Count="1" />
+      <LineId Id="345" Count="1" />
+      <LineId Id="349" Count="0" />
+      <LineId Id="343" Count="0" />
+      <LineId Id="350" Count="1" />
+      <LineId Id="342" Count="0" />
+      <LineId Id="335" Count="0" />
+      <LineId Id="334" Count="0" />
       <LineId Id="208" Count="0" />
       <LineId Id="256" Count="0" />
       <LineId Id="258" Count="0" />
