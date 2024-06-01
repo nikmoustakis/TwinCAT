@@ -12,7 +12,8 @@ END_VAR
     <Implementation>
       <ST><![CDATA[SUPER^(); ]]></ST>
     </Implementation>
-    <Method Name="M_MoveToPickPos" Id="{f64fc3ca-7148-49e5-9864-e4dee441f6e8}">
+    <Folder Name="Public" Id="{b45d30c4-d547-4a6d-b37e-7c0dc8c418e9}" />
+    <Method Name="M_MoveToPickPos" Id="{f64fc3ca-7148-49e5-9864-e4dee441f6e8}" FolderPath="Public\">
       <Declaration><![CDATA[METHOD M_MoveToPickPos : BOOL
 VAR_INPUT
 END_VAR
@@ -35,7 +36,7 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_MoveToPlacePos" Id="{2e459992-cfe1-4ff9-ad47-0e875ce65f90}">
+    <Method Name="M_MoveToPlacePos" Id="{2e459992-cfe1-4ff9-ad47-0e875ce65f90}" FolderPath="Public\">
       <Declaration><![CDATA[METHOD M_MoveToPlacePos : BOOL
 VAR_INPUT
 	Buffer_1_InUse : BOOL;

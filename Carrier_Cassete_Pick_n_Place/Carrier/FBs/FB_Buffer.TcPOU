@@ -20,13 +20,13 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF Init THEN 
- MEMSET(ADR(FullBuffer),16#1,SIZEOF(FullBuffer));
+	MEMSET(ADR(FullBuffer),16#1,SIZEOF(FullBuffer)); //We want a FullBuffer to act as placeholder for comparison
 Init := FALSE;
 END_IF
 
-IsEmpty := MEMCMP(ADR(BlankBuffer),ADR(PLACES),SIZEOF(BlankBuffer)) = 0; //TRUE if Buffer has zero parts
+IsEmpty := MEMCMP(ADR(BlankBuffer),ADR(PLACES),SIZEOF(BlankBuffer)) = 0; //TRUE if Buffer has zero parts (all slots are empty)
 
-IsFull := MEMCMP(ADR(FullBuffer),ADR(PLACES),SIZEOF(FullBuffer)) = 0; ]]></ST>
+IsFull := MEMCMP(ADR(FullBuffer),ADR(PLACES),SIZEOF(FullBuffer)) = 0;  //TRUE if Buffer is full (has zero available slots)]]></ST>
     </Implementation>
     <Method Name="M_ClearBuffer" Id="{b6ac521c-be4d-46de-b385-0b949ba5f652}">
       <Declaration><![CDATA[METHOD M_ClearBuffer : BOOL

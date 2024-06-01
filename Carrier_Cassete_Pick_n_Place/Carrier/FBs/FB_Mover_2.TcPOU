@@ -12,7 +12,8 @@ END_VAR
     <Implementation>
       <ST><![CDATA[SUPER^(); ]]></ST>
     </Implementation>
-    <Method Name="M_MoveToPickPos" Id="{e258428f-1e1d-4ad3-a463-236cc2a4631c}">
+    <Folder Name="Public" Id="{af285bc4-b00c-4a4e-9e52-036d5d6a95cd}" />
+    <Method Name="M_MoveToPickPos" Id="{e258428f-1e1d-4ad3-a463-236cc2a4631c}" FolderPath="Public\">
       <Declaration><![CDATA[METHOD M_MoveToPickPos : BOOL
 VAR_INPUT
 	Buffer_1_InUse : BOOL;
@@ -32,7 +33,7 @@ IF Sim_Time.Q THEN       //We assume in 1 seconds we go to Pick position; Casset
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_MoveToPlacePos" Id="{0dc6fcdf-22f9-4ad6-8f31-34f2d76363ff}">
+    <Method Name="M_MoveToPlacePos" Id="{0dc6fcdf-22f9-4ad6-8f31-34f2d76363ff}" FolderPath="Public\">
       <Declaration><![CDATA[METHOD M_MoveToPlacePos : BOOL
 ]]></Declaration>
       <Implementation>
