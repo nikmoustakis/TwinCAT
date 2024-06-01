@@ -3,7 +3,7 @@
   <GVL Name="GVL" Id="{dce89b43-af45-40e1-bb5c-bcb98d945e8c}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL CONSTANT
-	Buffer_Size : INT := 5;
+	Buffer_Size : INT := 12;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
