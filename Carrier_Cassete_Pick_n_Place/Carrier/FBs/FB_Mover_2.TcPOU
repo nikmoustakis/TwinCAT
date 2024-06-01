@@ -13,15 +13,6 @@ END_VAR
       <ST><![CDATA[SUPER^(); ]]></ST>
     </Implementation>
     <Folder Name="Public" Id="{af285bc4-b00c-4a4e-9e52-036d5d6a95cd}" />
-    <Method Name="M_DisableMover" Id="{02885b3b-cf1d-4872-b58d-9b41759b3f7e}" FolderPath="Public\">
-      <Declaration><![CDATA[METHOD M_DisableMover : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[State := E_MoverFixedState.Idle;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_MoveToPickPos" Id="{e258428f-1e1d-4ad3-a463-236cc2a4631c}" FolderPath="Public\">
       <Declaration><![CDATA[METHOD M_MoveToPickPos : BOOL
 VAR_INPUT
@@ -60,9 +51,6 @@ END_IF]]></ST>
     </Method>
     <LineIds Name="FB_Mover_2">
       <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Mover_2.M_DisableMover">
-      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Mover_2.M_MoveToPickPos">
       <LineId Id="10" Count="1" />

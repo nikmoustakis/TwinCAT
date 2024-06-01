@@ -59,6 +59,15 @@ ELSIF State = E_MoverFixedState.Idle THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_DisableMover" Id="{59639bde-73c8-4746-84a7-7c32addad53e}" FolderPath="Public\">
+      <Declaration><![CDATA[METHOD M_DisableMover : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[State := E_MoverFixedState.Idle;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_PickPart" Id="{508c54f0-ab18-44f7-b3fc-ce97a76918cf}" FolderPath="Public\">
       <Declaration><![CDATA[METHOD M_PickPart : BOOL
 VAR_INPUT
@@ -163,6 +172,9 @@ END_VAR
       <LineId Id="15" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Mover.M_DisableMover">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Mover.M_PickPart">
       <LineId Id="14" Count="0" />
