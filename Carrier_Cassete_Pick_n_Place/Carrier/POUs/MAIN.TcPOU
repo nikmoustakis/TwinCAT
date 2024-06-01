@@ -23,6 +23,8 @@ VAR
 	
 	ClearBuffer_1 : BOOL;
 	ClearBuffer_2 : BOOL;
+	
+	DisableMover_2 : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -97,10 +99,11 @@ END_CASE
 
 CASE Mover_2.State OF 
 	
-	E_MoverFixedState.Idle:
+	E_MoverFixedState.Idle,E_MoverFixedState.PartPlaced :
 	
-		IF Mover_1.TargetBuffer_Is_1 THEN //If Mover_1 is in Buffer_1 then Mover_2 can pick part from Buffer_2 with no COllision Risk
+		IF Mover_1.TargetBuffer_Is_1 THEN //If Mover_1 is in Buffer_1 then Mover_2 can pick part from Buffer_2 with no Collision Risk
 			IF NOT Buffer_2.IsEmpty THEN 
+				
 				Mover_2.P_TargetPosition_Buffer := Buffer_2.M_Find_First_Occupied_Pos(); //If Buffer_2 has at least one part, find first available location
 			
 				IF Mover_2.TargetPosition_Buffer <> 0 THEN //If Buffer returns available valid position ( no zero) then 
@@ -109,10 +112,32 @@ CASE Mover_2.State OF
 				
 				END_IF
 			END_IF
-		ELSIF   THEN
+			
+		ELSIF Mover_1.TargetBuffer_Is_2 AND (Mover_1.State <= E_MoverFixedState.PartPicked)  THEN 
+			
+			IF NOT Buffer_1.IsEmpty THEN 
+				
+				Mover_2.P_TargetPosition_Buffer := Buffer_1.M_Find_First_Occupied_Pos(); //If Buffer_2 has at least one part, find first available location
+			
+				IF Mover_2.TargetPosition_Buffer <> 0 THEN //If Buffer returns available valid position ( no zero) then 
+					Mover_2.M_TargetBuffer_Is_1();         //set Buffer_2 as target buffer and set to the Mover_2 the position of the buffer 
+					Mover_2.M_MoveToPickPos(Buffer_1_InUse:= TRUE , Buffer_Pos := Mover_2.TargetPosition_Buffer );
+				
+				END_IF
+			END_IF
 			
 		
 		END_IF
+		
+		
+	E_MoverFixedState.InPickedPos:
+		Mover_2.M_PickPart();
+			
+	E_MoverFixedState.PartPicked:
+			Mover_2.M_MoveToPlacePos();
+			
+	E_MoverFixedState.InPlacedPos:
+			Mover_2.M_PlacePart();
 
 END_CASE
 //CASE Mover_2.State OF 
@@ -203,6 +228,10 @@ END_IF
 IF ClearBuffer_2 THEN 
 	Buffer_2.M_ClearBuffer();
 	ClearBuffer_2 := FALSE;
+END_IF
+
+IF DisableMover_2 THEN 
+	Mover_2.M_DisableMover();
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
@@ -255,14 +284,19 @@ END_IF]]></ST>
       <LineId Id="336" Count="0" />
       <LineId Id="338" Count="1" />
       <LineId Id="337" Count="0" />
+      <LineId Id="354" Count="0" />
       <LineId Id="340" Count="1" />
       <LineId Id="344" Count="0" />
       <LineId Id="347" Count="1" />
       <LineId Id="345" Count="1" />
       <LineId Id="349" Count="0" />
+      <LineId Id="353" Count="0" />
       <LineId Id="343" Count="0" />
+      <LineId Id="355" Count="9" />
+      <LineId Id="352" Count="0" />
       <LineId Id="350" Count="1" />
       <LineId Id="342" Count="0" />
+      <LineId Id="371" Count="9" />
       <LineId Id="335" Count="0" />
       <LineId Id="334" Count="0" />
       <LineId Id="208" Count="0" />
@@ -293,6 +327,9 @@ END_IF]]></ST>
       <LineId Id="204" Count="0" />
       <LineId Id="304" Count="4" />
       <LineId Id="303" Count="0" />
+      <LineId Id="368" Count="0" />
+      <LineId Id="367" Count="0" />
+      <LineId Id="369" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>
