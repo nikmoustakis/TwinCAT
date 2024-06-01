@@ -81,10 +81,10 @@ M_Find_First_Occupied_Pos := 0;]]></ST>
     <Method Name="M_PickPartFromBuffer" Id="{bfdb16f4-87e3-49fb-9c55-85ec6bdc087a}">
       <Declaration><![CDATA[METHOD PUBLIC M_PickPartFromBuffer : BOOL
 VAR_INPUT
-END_VAR
-]]></Declaration>
+	Select_Index : INT;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[Places[Select_Index] := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_PlacePartInBuffer" Id="{8d6c9ac0-d716-45f6-ab80-315fa0726efc}">

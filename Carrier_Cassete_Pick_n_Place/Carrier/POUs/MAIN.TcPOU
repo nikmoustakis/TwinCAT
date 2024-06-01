@@ -133,6 +133,12 @@ CASE Mover_2.State OF
 		
 	E_MoverFixedState.InPickedPos:
 		Mover_2.M_PickPart();
+		
+		IF Mover_2.TargetBuffer_Is_1 THEN 
+			Buffer_1.M_PickPartFromBuffer(Mover_2.TargetPosition_Buffer);
+		ELSE 
+			Buffer_2.M_PickPartFromBuffer(Mover_2.TargetPosition_Buffer);
+		END_IF
 			
 	E_MoverFixedState.PartPicked:
 			Mover_2.M_MoveToPlacePos();
@@ -298,7 +304,11 @@ END_IF]]></ST>
       <LineId Id="352" Count="0" />
       <LineId Id="350" Count="1" />
       <LineId Id="342" Count="0" />
-      <LineId Id="371" Count="9" />
+      <LineId Id="371" Count="3" />
+      <LineId Id="393" Count="0" />
+      <LineId Id="389" Count="3" />
+      <LineId Id="388" Count="0" />
+      <LineId Id="375" Count="5" />
       <LineId Id="335" Count="0" />
       <LineId Id="334" Count="0" />
       <LineId Id="208" Count="0" />
