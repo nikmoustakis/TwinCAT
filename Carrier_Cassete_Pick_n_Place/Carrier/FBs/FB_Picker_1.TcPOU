@@ -5,10 +5,60 @@
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^(); ]]></ST>
+      <ST><![CDATA[SUPER^(); 
+
+
+_M_Picker_PosY_VISU(); //Compute Y position of Picker_1 to display on VISU ]]></ST>
     </Implementation>
-    <Folder Name="Public" Id="{b45d30c4-d547-4a6d-b37e-7c0dc8c418e9}" />
-    <Method Name="M_MoveToPickPos" Id="{f64fc3ca-7148-49e5-9864-e4dee441f6e8}" FolderPath="Public\">
+    <Folder Name="Methods" Id="{ad9e9f44-8bd6-4393-81e1-87f2a6721565}">
+      <Folder Name="Private" Id="{e5992217-f556-464c-b2df-a3a8d2f86323}" />
+      <Folder Name="Public" Id="{b45d30c4-d547-4a6d-b37e-7c0dc8c418e9}" />
+    </Folder>
+    <Method Name="_M_Picker_PosY_VISU" Id="{53e67097-0526-427d-a395-65e4e302d4a4}" FolderPath="Methods\Private\">
+      <Declaration><![CDATA[METHOD PRIVATE _M_Picker_PosY_VISU : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TargetBuffer_Is_1 AND ((State = E_PickerFixedState.InPlacedPos) OR  (State = E_PickerFixedState.PartPlaced)) THEN 
+	IF (TargetPosition_Buffer = 1 ) OR (TargetPosition_Buffer = 7 ) THEN 
+		Picker_PosY_VISU_Sim := -530;
+	ELSIF (TargetPosition_Buffer = 2 ) OR (TargetPosition_Buffer = 8) THEN	
+		Picker_PosY_VISU_Sim := -477;
+	ELSIF (TargetPosition_Buffer = 3 ) OR (TargetPosition_Buffer = 9) THEN	
+		Picker_PosY_VISU_Sim := -411;
+	ELSIF (TargetPosition_Buffer = 4 ) OR (TargetPosition_Buffer = 10) THEN	
+		Picker_PosY_VISU_Sim := -329;
+	ELSIF (TargetPosition_Buffer = 5 ) OR (TargetPosition_Buffer = 11) THEN	
+		Picker_PosY_VISU_Sim := -265;
+	ELSIF (TargetPosition_Buffer = 6 ) OR (TargetPosition_Buffer = 12) THEN	
+		Picker_PosY_VISU_Sim := -199;
+	END_IF
+	
+ELSIF TargetBuffer_Is_2 AND ((State = E_PickerFixedState.InPlacedPos) OR  (State = E_PickerFixedState.PartPlaced)) THEN 
+	IF (TargetPosition_Buffer = 1 ) OR (TargetPosition_Buffer = 7 ) THEN 
+		Picker_PosY_VISU_Sim := - 1181;
+	ELSIF (TargetPosition_Buffer = 2 ) OR (TargetPosition_Buffer = 8) THEN	
+		Picker_PosY_VISU_Sim := - 1101;
+	ELSIF (TargetPosition_Buffer = 3 ) OR (TargetPosition_Buffer = 9) THEN	
+		Picker_PosY_VISU_Sim := - 1033;
+	ELSIF (TargetPosition_Buffer = 4 ) OR (TargetPosition_Buffer = 10) THEN	
+		Picker_PosY_VISU_Sim := - 959;
+	ELSIF (TargetPosition_Buffer = 5 ) OR (TargetPosition_Buffer = 11) THEN	
+		Picker_PosY_VISU_Sim := - 884;
+	ELSIF (TargetPosition_Buffer = 6 ) OR (TargetPosition_Buffer = 12) THEN	
+		Picker_PosY_VISU_Sim := - 822;
+	END_IF
+
+ELSIF (State = E_PickerFixedState.InPickedPos) OR  (State = E_PickerFixedState.PartPicked) THEN 
+	Picker_PosY_VISU_Sim := 0;
+END_IF
+
+
+//TargetPosition_Buffer]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_MoveToPickPos" Id="{f64fc3ca-7148-49e5-9864-e4dee441f6e8}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_MoveToPickPos : BOOL
 VAR_INPUT
 END_VAR
@@ -27,7 +77,7 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_MoveToPlacePos" Id="{2e459992-cfe1-4ff9-ad47-0e875ce65f90}" FolderPath="Public\">
+    <Method Name="M_MoveToPlacePos" Id="{2e459992-cfe1-4ff9-ad47-0e875ce65f90}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_MoveToPlacePos : BOOL
 VAR_INPUT
 	Buffer_1_InUse : BOOL;
@@ -49,6 +99,25 @@ END_IF]]></ST>
     </Method>
     <LineIds Name="FB_Picker_1">
       <LineId Id="9" Count="0" />
+      <LineId Id="18" Count="1" />
+      <LineId Id="17" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker_1._M_Picker_PosY_VISU">
+      <LineId Id="12" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="8" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="37" Count="12" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="16" Count="0" />
     </LineIds>
     <LineIds Name="FB_Picker_1.M_MoveToPickPos">
       <LineId Id="17" Count="0" />

@@ -31,7 +31,7 @@ VAR
 	TargetBuffer_Is_2 : BOOL;   // Picker is going to use Buffer 2
 	TargetPosition_Buffer : INT;  // Position in y axis of Buffer 
 	
-	Picker_PosY_VISU_Sim : UINT; //Position of Picker in Y position simulating Picker in Y position
+	Picker_PosY_VISU_Sim : INT; //Position of Picker in Y position simulating Picker in Y position
 END_VAR
 ]]></Declaration>
     <Implementation>
