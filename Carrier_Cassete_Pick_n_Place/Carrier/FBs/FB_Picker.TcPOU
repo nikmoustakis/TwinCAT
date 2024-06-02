@@ -32,6 +32,8 @@ VAR
 	TargetPosition_Buffer : INT;  // Position in y axis of Buffer 
 	
 	Picker_PosY_VISU_Sim : INT; //Position of Picker in Y position simulating Picker in Y position
+	
+	Disable_Picker : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -67,7 +69,16 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[State := E_PickerFixedState.Idle;]]></ST>
+        <ST><![CDATA[Disable_Picker := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_EnablePicker" Id="{5a71c560-e7b1-426d-95ba-96abb84144a3}" FolderPath="Public\">
+      <Declaration><![CDATA[METHOD M_EnablePicker : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Disable_Picker := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_PickPart" Id="{508c54f0-ab18-44f7-b3fc-ce97a76918cf}" FolderPath="Public\">
@@ -176,6 +187,9 @@ END_VAR
       <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_Picker.M_DisablePicker">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker.M_EnablePicker">
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Picker.M_PickPart">

@@ -44,8 +44,19 @@ END_IF
 
 CASE Picker_1.State OF
 	
-	E_PickerFixedState.InPickedPos,E_PickerFixedState.Idle:
+	E_PickerFixedState.Idle:
+		IF NOT Picker_1.Disable_Picker THEN 
+			Picker_1.M_PickPart();
+		END_IF
+	
+	E_PickerFixedState.InPickedPos:
+	
+	IF Picker_1.Disable_Picker THEN 
+		Picker_1.M_IdleState();
+	ELSE
 		Picker_1.M_PickPart();
+	END_IF
+		
 		
 	E_PickerFixedState.PartPicked:
 	
@@ -90,13 +101,15 @@ CASE Picker_1.State OF
 		ELSE 
 			Buffer_2.M_PlacePartInBuffer(Picker_1.TargetPosition_Buffer);
 		END_IF
+		
+	
 
 END_CASE
 
 
 CASE Picker_2.State OF 
 	
-	E_PickerFixedState.Idle,E_PickerFixedState.PartPlaced :
+	E_PickerFixedState.PartPlaced :
 	
 		IF Picker_1.TargetBuffer_Is_1 THEN //If Picker_1 is in Buffer_1 then Picker_2 can pick part from Buffer_2 with no Collision Risk
 			IF NOT Buffer_2.IsEmpty THEN 
@@ -162,7 +175,18 @@ CASE Picker_2.State OF
 			Picker_2.M_MoveToPlacePos();
 			
 	E_PickerFixedState.InPlacedPos:
-			Picker_2.M_PlacePart();
+	
+	IF Picker_2.Disable_Picker THEN 
+		Picker_2.M_IdleState();
+	ELSE
+		Picker_2.M_PlacePart();
+	END_IF
+			
+	E_PickerFixedState.Idle:
+	
+	IF NOT Picker_2.Disable_Picker THEN 
+		Picker_2.M_PlacePart();
+	END_IF
 
 END_CASE
 
@@ -181,10 +205,14 @@ END_IF
 
 IF Disable_Picker_2 THEN 
 	Picker_2.M_DisablePicker();
+ELSE
+	Picker_2.M_EnablePicker();
 END_IF
 
 IF Disable_Picker_1 THEN 
 	Picker_1.M_DisablePicker();
+ELSE
+	Picker_1.M_EnablePicker();
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
@@ -205,8 +233,15 @@ END_IF]]></ST>
       <LineId Id="94" Count="0" />
       <LineId Id="92" Count="0" />
       <LineId Id="96" Count="1" />
+      <LineId Id="496" Count="1" />
+      <LineId Id="499" Count="0" />
+      <LineId Id="502" Count="0" />
+      <LineId Id="498" Count="0" />
       <LineId Id="103" Count="0" />
       <LineId Id="98" Count="0" />
+      <LineId Id="473" Count="2" />
+      <LineId Id="477" Count="1" />
+      <LineId Id="476" Count="0" />
       <LineId Id="102" Count="0" />
       <LineId Id="100" Count="0" />
       <LineId Id="104" Count="1" />
@@ -229,6 +264,7 @@ END_IF]]></ST>
       <LineId Id="196" Count="1" />
       <LineId Id="199" Count="1" />
       <LineId Id="198" Count="0" />
+      <LineId Id="494" Count="1" />
       <LineId Id="101" Count="0" />
       <LineId Id="99" Count="0" />
       <LineId Id="207" Count="0" />
@@ -261,7 +297,15 @@ END_IF]]></ST>
       <LineId Id="375" Count="1" />
       <LineId Id="447" Count="4" />
       <LineId Id="444" Count="2" />
-      <LineId Id="377" Count="3" />
+      <LineId Id="377" Count="2" />
+      <LineId Id="483" Count="0" />
+      <LineId Id="485" Count="3" />
+      <LineId Id="484" Count="0" />
+      <LineId Id="380" Count="0" />
+      <LineId Id="489" Count="1" />
+      <LineId Id="492" Count="0" />
+      <LineId Id="491" Count="0" />
+      <LineId Id="493" Count="0" />
       <LineId Id="335" Count="0" />
       <LineId Id="334" Count="0" />
       <LineId Id="84" Count="0" />
@@ -275,8 +319,11 @@ END_IF]]></ST>
       <LineId Id="303" Count="0" />
       <LineId Id="368" Count="0" />
       <LineId Id="367" Count="0" />
-      <LineId Id="369" Count="1" />
+      <LineId Id="369" Count="0" />
+      <LineId Id="479" Count="1" />
+      <LineId Id="370" Count="0" />
       <LineId Id="395" Count="2" />
+      <LineId Id="481" Count="1" />
       <LineId Id="394" Count="0" />
     </LineIds>
   </POU>
