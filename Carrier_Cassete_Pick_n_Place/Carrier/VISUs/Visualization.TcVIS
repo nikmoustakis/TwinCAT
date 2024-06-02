@@ -7480,11 +7480,11 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value">1416</v>
+                      <v n="Value">0</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
-                      <v n="Value">127</v>
+                      <v n="Value" t="Int16">0</v>
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
@@ -7515,11 +7515,11 @@
                     </o>
                     <o>
                       <v n="Id">550940142L</v>
-                      <v n="Value">1531</v>
+                      <v n="Value">115</v>
                     </o>
                     <o>
                       <v n="Id">1473355128L</v>
-                      <v n="Value">154</v>
+                      <v n="Value">27</v>
                     </o>
                     <o>
                       <v n="Id">2678395525L</v>
@@ -7535,7 +7535,23 @@
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
-                      <v n="Value">true</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">3528305787L</v>
+                      <v n="Value">""</v>
+                    </o>
+                    <o>
+                      <v n="Id">3560616238L</v>
+                      <v n="Value">"MAIN.Picker_1.Picker_PosY_VISU_Sim"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2738717112L</v>
+                      <v n="Value">"124"</v>
+                    </o>
+                    <o>
+                      <v n="Id">3093038170L</v>
+                      <v n="Value">false</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -7645,11 +7661,11 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value">802</v>
+                      <v n="Value" t="Int16">0</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
-                      <v n="Value">123</v>
+                      <v n="Value" t="Int16">0</v>
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
@@ -7680,11 +7696,11 @@
                     </o>
                     <o>
                       <v n="Id">550940142L</v>
-                      <v n="Value">917</v>
+                      <v n="Value">115</v>
                     </o>
                     <o>
                       <v n="Id">1473355128L</v>
-                      <v n="Value">150</v>
+                      <v n="Value">27</v>
                     </o>
                     <o>
                       <v n="Id">2678395525L</v>
@@ -7700,7 +7716,15 @@
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
-                      <v n="Value">true</v>
+                      <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">3560616238L</v>
+                      <v n="Value">"MAIN.Picker_2.Picker_PosY_VISU_Sim"</v>
+                    </o>
+                    <o>
+                      <v n="Id">2738717112L</v>
+                      <v n="Value">"124"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>

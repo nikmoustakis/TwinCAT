@@ -22,39 +22,39 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF TargetBuffer_Is_1 AND ((State = E_PickerFixedState.InPlacedPos) OR  (State = E_PickerFixedState.PartPlaced)) THEN 
 	IF (TargetPosition_Buffer = 1 ) OR (TargetPosition_Buffer = 7 ) THEN 
-		Picker_PosY_VISU_Sim := -530;
+		Picker_PosY_VISU_Sim := 2238 -530;
 	ELSIF (TargetPosition_Buffer = 2 ) OR (TargetPosition_Buffer = 8) THEN	
-		Picker_PosY_VISU_Sim := -477;
+		Picker_PosY_VISU_Sim := 2238 -477;
 	ELSIF (TargetPosition_Buffer = 3 ) OR (TargetPosition_Buffer = 9) THEN	
-		Picker_PosY_VISU_Sim := -411;
+		Picker_PosY_VISU_Sim := 2238 -411;
 	ELSIF (TargetPosition_Buffer = 4 ) OR (TargetPosition_Buffer = 10) THEN	
-		Picker_PosY_VISU_Sim := -329;
+		Picker_PosY_VISU_Sim := 2238 -329;
 	ELSIF (TargetPosition_Buffer = 5 ) OR (TargetPosition_Buffer = 11) THEN	
-		Picker_PosY_VISU_Sim := -265;
+		Picker_PosY_VISU_Sim := 2238 -265;
 	ELSIF (TargetPosition_Buffer = 6 ) OR (TargetPosition_Buffer = 12) THEN	
-		Picker_PosY_VISU_Sim := -199;
+		Picker_PosY_VISU_Sim := 2238 -199;
 	END_IF
 	
 ELSIF TargetBuffer_Is_2 AND ((State = E_PickerFixedState.InPlacedPos) OR  (State = E_PickerFixedState.PartPlaced)) THEN 
 	IF (TargetPosition_Buffer = 1 ) OR (TargetPosition_Buffer = 7 ) THEN 
-		Picker_PosY_VISU_Sim := - 1181;
+		Picker_PosY_VISU_Sim := 2238 - 1181;
 	ELSIF (TargetPosition_Buffer = 2 ) OR (TargetPosition_Buffer = 8) THEN	
-		Picker_PosY_VISU_Sim := - 1101;
+		Picker_PosY_VISU_Sim := 2238 - 1101;
 	ELSIF (TargetPosition_Buffer = 3 ) OR (TargetPosition_Buffer = 9) THEN	
-		Picker_PosY_VISU_Sim := - 1033;
+		Picker_PosY_VISU_Sim := 2238 - 1033;
 	ELSIF (TargetPosition_Buffer = 4 ) OR (TargetPosition_Buffer = 10) THEN	
-		Picker_PosY_VISU_Sim := - 959;
+		Picker_PosY_VISU_Sim := 2238 - 959;
 	ELSIF (TargetPosition_Buffer = 5 ) OR (TargetPosition_Buffer = 11) THEN	
-		Picker_PosY_VISU_Sim := - 884;
+		Picker_PosY_VISU_Sim := 2238 - 884;
 	ELSIF (TargetPosition_Buffer = 6 ) OR (TargetPosition_Buffer = 12) THEN	
-		Picker_PosY_VISU_Sim := - 822;
+		Picker_PosY_VISU_Sim := 2238 - 822;
 	END_IF
 
 ELSIF (State = E_PickerFixedState.InPickedPos) OR  (State = E_PickerFixedState.PartPicked) THEN 
-	Picker_PosY_VISU_Sim := 0;
+	Picker_PosY_VISU_Sim := 2238;
 END_IF
 
-
+//Picker_PosY_VISU_Sim := 2238;
 //TargetPosition_Buffer]]></ST>
       </Implementation>
     </Method>

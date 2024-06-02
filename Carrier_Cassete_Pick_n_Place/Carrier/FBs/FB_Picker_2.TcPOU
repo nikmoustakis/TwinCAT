@@ -5,12 +5,58 @@
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^(); ]]></ST>
+      <ST><![CDATA[SUPER^(); 
+
+_M_Picker_PosY_VISU(); //Compute Y position of Picker_1 to display on VISU ]]></ST>
     </Implementation>
     <Folder Name="Methods" Id="{90dcab63-cbe7-427e-baf0-ecf1bb47293f}">
       <Folder Name="Private" Id="{a65d1c9f-a872-4792-84a9-23924fe41604}" />
       <Folder Name="Public" Id="{af285bc4-b00c-4a4e-9e52-036d5d6a95cd}" />
     </Folder>
+    <Method Name="_M_Picker_PosY_VISU" Id="{2db728b4-4d0a-496a-9fe0-4c447694524e}" FolderPath="Methods\Private\">
+      <Declaration><![CDATA[METHOD PRIVATE _M_Picker_PosY_VISU : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF TargetBuffer_Is_1 AND ((State = E_PickerFixedState.InPickedPos) OR  (State = E_PickerFixedState.PartPicked)) THEN 
+	IF (TargetPosition_Buffer = 1 ) OR (TargetPosition_Buffer = 7 ) THEN 
+		Picker_PosY_VISU_Sim := 2238 -530;
+	ELSIF (TargetPosition_Buffer = 2 ) OR (TargetPosition_Buffer = 8) THEN	
+		Picker_PosY_VISU_Sim := 2238 -477;
+	ELSIF (TargetPosition_Buffer = 3 ) OR (TargetPosition_Buffer = 9) THEN	
+		Picker_PosY_VISU_Sim := 2238 -411;
+	ELSIF (TargetPosition_Buffer = 4 ) OR (TargetPosition_Buffer = 10) THEN	
+		Picker_PosY_VISU_Sim := 2238 -329;
+	ELSIF (TargetPosition_Buffer = 5 ) OR (TargetPosition_Buffer = 11) THEN	
+		Picker_PosY_VISU_Sim := 2238 -265;
+	ELSIF (TargetPosition_Buffer = 6 ) OR (TargetPosition_Buffer = 12) THEN	
+		Picker_PosY_VISU_Sim := 2238 -199;
+	END_IF
+	
+ELSIF TargetBuffer_Is_2 AND ((State = E_PickerFixedState.InPickedPos) OR  (State = E_PickerFixedState.PartPicked)) THEN 
+	IF (TargetPosition_Buffer = 1 ) OR (TargetPosition_Buffer = 7 ) THEN 
+		Picker_PosY_VISU_Sim := 2238 - 1181;
+	ELSIF (TargetPosition_Buffer = 2 ) OR (TargetPosition_Buffer = 8) THEN	
+		Picker_PosY_VISU_Sim := 2238 - 1101;
+	ELSIF (TargetPosition_Buffer = 3 ) OR (TargetPosition_Buffer = 9) THEN	
+		Picker_PosY_VISU_Sim := 2238 - 1033;
+	ELSIF (TargetPosition_Buffer = 4 ) OR (TargetPosition_Buffer = 10) THEN	
+		Picker_PosY_VISU_Sim := 2238 - 959;
+	ELSIF (TargetPosition_Buffer = 5 ) OR (TargetPosition_Buffer = 11) THEN	
+		Picker_PosY_VISU_Sim := 2238 - 884;
+	ELSIF (TargetPosition_Buffer = 6 ) OR (TargetPosition_Buffer = 12) THEN	
+		Picker_PosY_VISU_Sim := 2238 - 822;
+	END_IF
+
+ELSIF (State = E_PickerFixedState.InPlacedPos) OR  (State = E_PickerFixedState.PartPlaced) THEN 
+	Picker_PosY_VISU_Sim := 810;
+END_IF
+
+//Picker_PosY_VISU_Sim := 2238;
+//TargetPosition_Buffer]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_MoveToPickPos" Id="{e258428f-1e1d-4ad3-a463-236cc2a4631c}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_MoveToPickPos : BOOL
 VAR_INPUT
@@ -49,6 +95,25 @@ END_IF]]></ST>
     </Method>
     <LineIds Name="FB_Picker_2">
       <LineId Id="9" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker_2._M_Picker_PosY_VISU">
+      <LineId Id="12" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="8" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="37" Count="12" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="16" Count="0" />
     </LineIds>
     <LineIds Name="FB_Picker_2.M_MoveToPickPos">
       <LineId Id="10" Count="1" />
