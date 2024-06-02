@@ -2,12 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="FB_Picker_1" Id="{91297915-e066-40a2-a7f5-28d2930e8691}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Picker_1 EXTENDS FB_Picker
-VAR_INPUT
-END_VAR
-VAR_OUTPUT
-END_VAR
-VAR
-END_VAR
+
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^(); ]]></ST>
@@ -20,11 +15,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//If Picker_1 then PickFromCassette; if Picker_2  PickFromBuffer
-
-//State := E_MoverTransitionState.Picking;
-
-
+        <ST><![CDATA[
 Sim_Time(IN := TRUE, PT := T#1S);
 
 IF Sim_Time.Q THEN       //We assume in 1 seconds we go to Pick position; CassettePos for Mover1, BufferPos for Mover2
@@ -60,9 +51,7 @@ END_IF]]></ST>
       <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_Picker_1.M_MoveToPickPos">
-      <LineId Id="10" Count="1" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="16" Count="1" />
+      <LineId Id="17" Count="0" />
       <LineId Id="6" Count="0" />
       <LineId Id="19" Count="0" />
       <LineId Id="18" Count="0" />

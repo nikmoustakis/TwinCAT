@@ -8,28 +8,30 @@ VAR_OUTPUT
 END_VAR
 VAR
 	//Mover State
-	State : INT; (*Current State of Picker (
-					Idle        := 0,
-					InPickedPos := 1,
-					PartPicked 	:= 2,
-					InPlacedPos := 3,
-					PartPlaced  := 4*)
+	State            : INT; (*Current State of Picker (
+								Idle        := 0,
+								InPickedPos := 1,
+								PartPicked 	:= 2,
+								InPlacedPos := 3,
+								PartPlaced  := 4*)
 	
-	StatusDisp : STRING;
+	StatusDisp       : STRING;
 	
 	//Inputs
-	In_VacuumON : BOOL; //When True means part is detected in vacuum
+	In_VacuumON      : BOOL; //When True means part is detected in vacuum
 	
 	//Outputs
-	Out_Vacuum : BOOL;     //Becomes TRUE to pick part
-	Out_Blower     : BOOL; //Becomes TRUE to put part
+	Out_Vacuum       : BOOL; //Becomes TRUE to pick part
+	Out_Blower       : BOOL; //Becomes TRUE to put part
 	
 	//Simulation Timer 
-	Sim_Time : TON ;        //Used to simulate feedback for each state to be riched i.e. time it takes to pick/place
+	Sim_Time          : TON ;   //Used to simulate feedback for each state to be riched i.e. time it takes to pick/place
 	
-	TargetBuffer_Is_1 : BOOL;          // Mover is going to use Buffer 1
-	TargetBuffer_Is_2 : BOOL;          // Mover is going to use Buffer 2
-	TargetPosition_Buffer : INT;    // Position in y axis of Buffer 
+	TargetBuffer_Is_1 : BOOL;   // Picker is going to use Buffer 1
+	TargetBuffer_Is_2 : BOOL;   // Picker is going to use Buffer 2
+	TargetPosition_Buffer : INT;  // Position in y axis of Buffer 
+	
+	Picker_PosY_VISU_Sim : UINT; //Position of Picker in Y position simulating Picker in Y position
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -77,7 +79,7 @@ END_VAR
         <ST><![CDATA[Out_Blower := FALSE;
 Out_Vacuum := TRUE;
 
-Sim_Time(IN := Out_Vacuum, PT := T#1000MS);
+Sim_Time(IN := Out_Vacuum, PT := T#500MS);
 
 
 In_VacuumON := Sim_Time.Q; //We assume when Out_vacuum is TRUE, In_Vacuum feedback becomes true after 100ms
@@ -104,7 +106,7 @@ END_VAR
         <ST><![CDATA[Out_Blower := TRUE;
 Out_Vacuum := FALSE;
 
-Sim_Time(IN :=  Out_Blower, PT := T#1000MS);
+Sim_Time(IN :=  Out_Blower, PT := T#500MS);
 
 
 In_VacuumON := Sim_Time.Q; //We assume when Out_vacuum is FALSE, In_Vacuum feedback becomes FALSE after 100ms
