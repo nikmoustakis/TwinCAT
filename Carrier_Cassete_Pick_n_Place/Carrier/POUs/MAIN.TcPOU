@@ -172,21 +172,21 @@ CASE Picker_2.State OF
 		END_IF
 	
 	
-			Picker_2.M_MoveToPlacePos();
+		Picker_2.M_MoveToPlacePos();
 			
 	E_PickerFixedState.InPlacedPos:
 	
-	IF Picker_2.Disable_Picker THEN 
-		Picker_2.M_IdleState();
-	ELSE
-		Picker_2.M_PlacePart();
-	END_IF
+		IF Picker_2.Disable_Picker THEN 
+			Picker_2.M_IdleState();
+		ELSE
+			Picker_2.M_PlacePart();
+		END_IF
 			
 	E_PickerFixedState.Idle:
 	
-	IF NOT Picker_2.Disable_Picker THEN 
-		Picker_2.M_PlacePart();
-	END_IF
+		IF NOT Picker_2.Disable_Picker THEN 
+			Picker_2.M_PlacePart();
+		END_IF
 
 END_CASE
 
