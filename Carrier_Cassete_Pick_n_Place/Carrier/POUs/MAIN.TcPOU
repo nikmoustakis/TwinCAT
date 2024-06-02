@@ -116,7 +116,7 @@ CASE Picker_2.State OF
 				
 				Picker_2.P_TargetPosition_Buffer := Buffer_2.M_Find_First_Occupied_Pos(); //If Buffer_2 has at least one part, find first available location
 			
-				IF Picker_2.TargetPosition_Buffer <> 0 THEN //If Buffer returns available valid position ( no zero) then 
+				IF (Picker_2.TargetPosition_Buffer <> 0)  AND (Picker_1.State <= E_PickerFixedState.PartPicked)  THEN //If Buffer returns available valid position ( no zero) then 
 					Picker_2.M_TargetBuffer_Is_2();         //set Buffer_2 as target buffer and set to the Picker_2 the position of the buffer 
 					Picker_2.M_MoveToPickPos(Buffer_1_InUse:= FALSE , Buffer_Pos := Picker_2.TargetPosition_Buffer );
 				
@@ -125,7 +125,7 @@ CASE Picker_2.State OF
 			ELSE //If Buffer_1 Is Empty and Picker_1 is Idle then Picker_2 should move to Buffer_2
 				Picker_2.P_TargetPosition_Buffer := Buffer_1.M_Find_First_Occupied_Pos(); //If Buffer_2 has at least one part, find first available location
 			
-				IF Picker_2.TargetPosition_Buffer <> 0 THEN //If Buffer returns available valid position ( no zero) then 
+				IF (Picker_2.TargetPosition_Buffer <> 0) AND (Picker_1.State <= E_PickerFixedState.PartPicked) THEN //If Buffer returns available valid position ( no zero) then 
 					Picker_2.M_TargetBuffer_Is_1();         //set Buffer_2 as target buffer and set to the Picker_2 the position of the buffer 
 					Picker_2.M_MoveToPickPos(Buffer_1_InUse:= TRUE , Buffer_Pos := Picker_2.TargetPosition_Buffer );
 				
