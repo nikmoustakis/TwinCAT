@@ -3,24 +3,19 @@
   <POU Name="MAIN" Id="{123221e7-7c9c-42bb-b3e5-4703cdf0b215}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	Picker1_YPos : INT; // Y Position of Picker 1
-    Picker2_YPos : INT; // Y Position of Picker 2
-   // BufferA_Flag : ARRAY[1..5] OF BOOL := [FALSE, FALSE, FALSE, FALSE, FALSE]; // TRUE if a position in Buffer A is in use
-   // BufferB_Flag : ARRAY[1..5] OF BOOL := [FALSE, FALSE, FALSE, FALSE, FALSE]; // TRUE if a position in Buffer B is in use
+	
     Buffer_1 : FB_Buffer;
     Buffer_2 : FB_Buffer;
 	
 	Picker_1  : FB_Picker_1;
 	Picker_2  : FB_Picker_2;
 	
-	
-	
-	
 	ClearBuffer_1 : BOOL;
 	ClearBuffer_2 : BOOL;
 	
 	Disable_Picker_2 : BOOL;
 	Disable_Picker_1 : BOOL;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -30,10 +25,7 @@ Buffer_2();
 
 Picker_1();
 Picker_2();
-//CASE Picker_1.State OF
-	
-//	E_PickerFixedState.:
-		
+
 
 IF Picker_1.State = E_PickerFixedState.Idle AND   //If both buffers are empty and both Pickers are idle, Picker1 is picking a part
 	Picker_2.State = E_PickerFixedState.Idle AND  //to initiate the pick-place sequence
@@ -221,9 +213,6 @@ END_IF]]></ST>
       <LineId Id="153" Count="0" />
       <LineId Id="152" Count="0" />
       <LineId Id="154" Count="0" />
-      <LineId Id="72" Count="0" />
-      <LineId Id="87" Count="0" />
-      <LineId Id="77" Count="0" />
       <LineId Id="86" Count="0" />
       <LineId Id="88" Count="0" />
       <LineId Id="85" Count="0" />
