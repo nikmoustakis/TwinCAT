@@ -21,6 +21,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"566"</v>
+              <v n="TextDefault">"Carrier"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"856"</v>
+              <v n="TextDefault">"Cassette"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"202"</v>
               <v n="TextDefault">"Clear Buffer 1"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -28,6 +38,11 @@
             <o>
               <v n="TextID">"750"</v>
               <v n="TextDefault">"Clear Buffer 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"93"</v>
+              <v n="TextDefault">"Disable "</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -58,6 +73,31 @@
             <o>
               <v n="TextID">"961"</v>
               <v n="TextDefault">"Mover1."</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"574"</v>
+              <v n="TextDefault">"Picker"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"153"</v>
+              <v n="TextDefault">"Picker 1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"802"</v>
+              <v n="TextDefault">"Picker 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"298"</v>
+              <v n="TextDefault">"Picker State"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"510"</v>
+              <v n="TextDefault">"State"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
           </l>

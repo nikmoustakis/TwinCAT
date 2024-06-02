@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_Picker" Id="{738d1052-5948-409a-8668-cd35ee69a7c9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Picker
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	//Mover State
+	State : INT; (*Current State of Picker (
+					Idle        := 0,
+					InPickedPos := 1,
+					PartPicked 	:= 2,
+					InPlacedPos := 3,
+					PartPlaced  := 4*)
+	
+	StatusDisp : STRING;
+	
+	//Inputs
+	In_VacuumON : BOOL; //When True means part is detected in vacuum
+	
+	//Outputs
+	Out_Vacuum : BOOL;     //Becomes TRUE to pick part
+	Out_Blower     : BOOL; //Becomes TRUE to put part
+	
+	//Simulation Timer 
+	Sim_Time : TON ;        //Used to simulate feedback for each state to be riched i.e. time it takes to pick/place
+	
+	TargetBuffer_Is_1 : BOOL;          // Mover is going to use Buffer 1
+	TargetBuffer_Is_2 : BOOL;          // Mover is going to use Buffer 2
+	TargetPosition_Buffer : INT;    // Position in y axis of Buffer 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+_M_EvaluateDisplayStatus();]]></ST>
+    </Implementation>
+    <Folder Name="Private" Id="{8099057d-cde1-4909-9eaa-8fddc3b0c58a}" />
+    <Folder Name="Public" Id="{dcc1c3c9-9b25-4958-b703-0a0963bd09e2}">
+      <Folder Name="Buffer Methods" Id="{a2d7f5a9-ca02-48ee-911a-6b3cb40f483b}" />
+    </Folder>
+    <Method Name="_M_EvaluateDisplayStatus" Id="{6244459b-f95b-41a1-87b0-693fff1c4143}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE _M_EvaluateDisplayStatus : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF State = E_PickerFixedState.PartPicked THEN 
+	StatusDisp := 'Part Picked';
+ELSIF State = E_PickerFixedState.PartPlaced THEN 
+	StatusDisp := 'Part Placed';
+ELSIF State = E_PickerFixedState.InPickedPos THEN 
+	StatusDisp := 'Picker in Pick Pos';
+ELSIF State = E_PickerFixedState.InPlacedPos THEN 
+	StatusDisp := 'Picker in Place Pos';
+ELSIF State = E_PickerFixedState.Idle THEN 
+	StatusDisp := 'Picker is Idle';
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_DisablePicker" Id="{59639bde-73c8-4746-84a7-7c32addad53e}" FolderPath="Public\">
+      <Declaration><![CDATA[METHOD M_DisablePicker : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[State := E_PickerFixedState.Idle;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_PickPart" Id="{508c54f0-ab18-44f7-b3fc-ce97a76918cf}" FolderPath="Public\">
+      <Declaration><![CDATA[METHOD M_PickPart : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Out_Blower := FALSE;
+Out_Vacuum := TRUE;
+
+Sim_Time(IN := Out_Vacuum, PT := T#1000MS);
+
+
+In_VacuumON := Sim_Time.Q; //We assume when Out_vacuum is TRUE, In_Vacuum feedback becomes true after 100ms
+
+//State := E_MoverTransitionState.Picking;
+
+
+
+IF In_VacuumON THEN 
+	State := E_PickerFixedState.PartPicked;
+	Sim_Time(IN := FALSE);
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_PlacePart" Id="{ac36852f-3b3e-4b3c-ad85-4335c7f190aa}" FolderPath="Public\">
+      <Declaration><![CDATA[METHOD M_PlacePart : BOOL
+VAR_INPUT
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Out_Blower := TRUE;
+Out_Vacuum := FALSE;
+
+Sim_Time(IN :=  Out_Blower, PT := T#1000MS);
+
+
+In_VacuumON := Sim_Time.Q; //We assume when Out_vacuum is FALSE, In_Vacuum feedback becomes FALSE after 100ms
+
+//State := E_MoverTransitionState.Placing;
+
+
+
+IF  In_VacuumON THEN 
+	State := E_PickerFixedState.PartPlaced;
+	Sim_Time(IN := FALSE);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_TargetBuffer_Is_1" Id="{182ef201-39af-4582-8ddf-e2fa923d81b9}" FolderPath="Public\Buffer Methods\">
+      <Declaration><![CDATA[METHOD M_TargetBuffer_Is_1 : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TargetBuffer_Is_1 := TRUE;
+TargetBuffer_Is_2 := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_TargetBuffer_Is_2" Id="{a1848d1e-a972-4da5-85ac-2bdbac856f6b}" FolderPath="Public\Buffer Methods\">
+      <Declaration><![CDATA[METHOD M_TargetBuffer_Is_2 : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TargetBuffer_Is_1 := FALSE;
+TargetBuffer_Is_2 := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_TargetPosition_Buffer" Id="{0c55cd5a-f0ee-4089-926d-509c15dac085}">
+      <Declaration><![CDATA[PROPERTY P_TargetPosition_Buffer : INT]]></Declaration>
+      <Get Name="Get" Id="{fc0ed226-ce55-458c-8504-491928cc48df}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_TargetPosition_Buffer := TargetPosition_Buffer;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{15425be2-f850-4fe6-a07b-295114f5afd8}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TargetPosition_Buffer := P_TargetPosition_Buffer;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="FB_Picker">
+      <LineId Id="40" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker._M_EvaluateDisplayStatus">
+      <LineId Id="5" Count="1" />
+      <LineId Id="8" Count="1" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker.M_DisablePicker">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker.M_PickPart">
+      <LineId Id="14" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="16" Count="4" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="34" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker.M_PlacePart">
+      <LineId Id="28" Count="2" />
+      <LineId Id="43" Count="4" />
+      <LineId Id="36" Count="5" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker.M_TargetBuffer_Is_1">
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker.M_TargetBuffer_Is_2">
+      <LineId Id="12" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker.P_TargetPosition_Buffer.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker.P_TargetPosition_Buffer.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -18,22 +18,22 @@
     <LibraryReferences>{9ee0f9e3-9c8c-494e-bf68-189503bd4593}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DUTs\E_MoverTransitionState.TcDUT">
+    <Compile Include="DUTs\E_PickerTransitionState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\E_MoverFixedState.TcDUT">
+    <Compile Include="DUTs\E_PickerFixedState.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FBs\FB_Buffer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FBs\FB_Mover.TcPOU">
+    <Compile Include="FBs\FB_Picker.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FBs\FB_Mover_1.TcPOU">
+    <Compile Include="FBs\FB_Picker_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FBs\FB_Mover_2.TcPOU">
+    <Compile Include="FBs\FB_Picker_2.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
@@ -133,8 +133,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{246001F4-279D-43AC-B241-948EB31120E1}</v>
@@ -183,14 +183,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Boolean">System.Boolean</Type>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>
