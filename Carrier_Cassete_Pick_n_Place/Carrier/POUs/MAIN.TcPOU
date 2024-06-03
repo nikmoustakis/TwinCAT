@@ -16,6 +16,9 @@ VAR
 	Disable_Picker_2 : BOOL;
 	Disable_Picker_1 : BOOL;
 	
+	Serial_Number_Generator : UDINT;
+	
+	New_Part_Ack : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -37,17 +40,18 @@ END_IF
 CASE Picker_1.State OF
 	
 	E_PickerFixedState.Idle:
+	
 		IF NOT Picker_1.Disable_Picker THEN 
 			Picker_1.M_PickPart();
 		END_IF
 	
 	E_PickerFixedState.InPickedPos:
 	
-	IF Picker_1.Disable_Picker THEN 
-		Picker_1.M_IdleState();
-	ELSE
-		Picker_1.M_PickPart();
-	END_IF
+		IF Picker_1.Disable_Picker THEN 
+			Picker_1.M_IdleState();
+		ELSE
+			Picker_1.M_PickPart();
+		END_IF
 		
 		
 	E_PickerFixedState.PartPicked:
@@ -75,6 +79,10 @@ CASE Picker_1.State OF
 		
 		END_IF
 		
+		IF NOT New_Part_Ack THEN 
+			Serial_Number_Generator := Serial_Number_Generator + 1;
+			New_Part_Ack := TRUE;
+		END_IF
 	
 		
 		IF  Picker_1.TargetPosition_Buffer <> 0 THEN //If there is valid buffer target position, pass buffer type and the buffer position for the Picker to place the part
@@ -157,6 +165,8 @@ CASE Picker_2.State OF
 			
 	E_PickerFixedState.PartPicked:
 				
+		
+		
 		IF Picker_2.TargetBuffer_Is_1 THEN 
 			Buffer_1.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer);
 		ELSE 
@@ -223,6 +233,7 @@ END_IF]]></ST>
       <LineId Id="92" Count="0" />
       <LineId Id="96" Count="1" />
       <LineId Id="496" Count="1" />
+      <LineId Id="531" Count="0" />
       <LineId Id="499" Count="0" />
       <LineId Id="502" Count="0" />
       <LineId Id="498" Count="0" />
@@ -244,7 +255,10 @@ END_IF]]></ST>
       <LineId Id="381" Count="0" />
       <LineId Id="297" Count="0" />
       <LineId Id="157" Count="0" />
-      <LineId Id="177" Count="1" />
+      <LineId Id="177" Count="0" />
+      <LineId Id="533" Count="2" />
+      <LineId Id="532" Count="0" />
+      <LineId Id="178" Count="0" />
       <LineId Id="187" Count="3" />
       <LineId Id="167" Count="0" />
       <LineId Id="176" Count="0" />
@@ -284,7 +298,10 @@ END_IF]]></ST>
       <LineId Id="371" Count="3" />
       <LineId Id="388" Count="0" />
       <LineId Id="375" Count="1" />
-      <LineId Id="447" Count="4" />
+      <LineId Id="447" Count="0" />
+      <LineId Id="529" Count="0" />
+      <LineId Id="522" Count="0" />
+      <LineId Id="448" Count="3" />
       <LineId Id="444" Count="2" />
       <LineId Id="377" Count="2" />
       <LineId Id="483" Count="0" />
