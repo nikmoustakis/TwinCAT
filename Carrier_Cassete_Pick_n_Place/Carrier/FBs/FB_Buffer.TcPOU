@@ -112,11 +112,13 @@ Buffer_Slots[Select_Index] := FALSE;]]></ST>
     <Method Name="M_PlacePartInBuffer" Id="{8d6c9ac0-d716-45f6-ab80-315fa0726efc}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_PlacePartInBuffer : BOOL
 VAR_INPUT
-	Select_Index : INT;
+	Select_Index       : UINT;
+	Part_Serial_Number : UDINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[//Picker_1 is placing part in Buffer Slot at position Select_Index
-Buffer_Slots[Select_Index] := TRUE;]]></ST>
+Buffer_Slots[Select_Index] := TRUE;
+Parts_Serial_Number[Select_Index] := Part_Serial_Number;]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_TargetPosition_Buffer" Id="{3afd0690-864f-4124-aa8d-b5d4766c332d}">
@@ -174,6 +176,7 @@ END_VAR
     <LineIds Name="FB_Buffer.M_PlacePartInBuffer">
       <LineId Id="9" Count="0" />
       <LineId Id="5" Count="0" />
+      <LineId Id="13" Count="0" />
     </LineIds>
     <LineIds Name="FB_Buffer.P_TargetPosition_Buffer.Get">
       <LineId Id="2" Count="0" />

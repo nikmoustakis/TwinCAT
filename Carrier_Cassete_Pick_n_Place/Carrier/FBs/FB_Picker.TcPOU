@@ -29,7 +29,7 @@ VAR
 	
 	TargetBuffer_Is_1 : BOOL;   // Picker is going to use Buffer 1
 	TargetBuffer_Is_2 : BOOL;   // Picker is going to use Buffer 2
-	TargetPosition_Buffer : INT;  // Position in y axis of Buffer 
+	TargetPosition_Buffer : UINT;  // Position in y axis of Buffer 
 	
 	Picker_PosY_VISU_Sim : INT; //Position of Picker in Y position simulating Picker in Y position
 	
@@ -155,7 +155,7 @@ TargetBuffer_Is_2 := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_TargetPosition_Buffer" Id="{0c55cd5a-f0ee-4089-926d-509c15dac085}">
-      <Declaration><![CDATA[PROPERTY P_TargetPosition_Buffer : INT]]></Declaration>
+      <Declaration><![CDATA[PROPERTY P_TargetPosition_Buffer : UINT]]></Declaration>
       <Get Name="Get" Id="{fc0ed226-ce55-458c-8504-491928cc48df}">
         <Declaration><![CDATA[VAR
 END_VAR

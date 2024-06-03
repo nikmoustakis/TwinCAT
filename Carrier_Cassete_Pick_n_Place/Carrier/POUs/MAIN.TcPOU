@@ -102,9 +102,9 @@ CASE Picker_1.State OF
 		Picker_1.M_MoveToPickPos();
 		
 		IF Picker_1.TargetBuffer_Is_1 THEN 
-			Buffer_1.M_PlacePartInBuffer(Picker_1.TargetPosition_Buffer);
+			Buffer_1.M_PlacePartInBuffer(Picker_1.TargetPosition_Buffer,New_Part_Serial_Number);
 		ELSE 
-			Buffer_2.M_PlacePartInBuffer(Picker_1.TargetPosition_Buffer);
+			Buffer_2.M_PlacePartInBuffer(Picker_1.TargetPosition_Buffer,New_Part_Serial_Number);
 		END_IF
 		
 	
