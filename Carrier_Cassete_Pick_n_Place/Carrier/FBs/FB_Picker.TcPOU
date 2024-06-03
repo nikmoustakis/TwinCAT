@@ -40,11 +40,13 @@ END_VAR
       <ST><![CDATA[
 _M_EvaluateDisplayStatus();]]></ST>
     </Implementation>
-    <Folder Name="Private" Id="{8099057d-cde1-4909-9eaa-8fddc3b0c58a}" />
-    <Folder Name="Public" Id="{dcc1c3c9-9b25-4958-b703-0a0963bd09e2}">
-      <Folder Name="Buffer Methods" Id="{a2d7f5a9-ca02-48ee-911a-6b3cb40f483b}" />
+    <Folder Name="Methods" Id="{cf3e82de-3c76-4832-9071-5e6a4f1b0b34}">
+      <Folder Name="Private" Id="{8099057d-cde1-4909-9eaa-8fddc3b0c58a}" />
+      <Folder Name="Public" Id="{dcc1c3c9-9b25-4958-b703-0a0963bd09e2}">
+        <Folder Name="Buffer Methods" Id="{a2d7f5a9-ca02-48ee-911a-6b3cb40f483b}" />
+      </Folder>
     </Folder>
-    <Method Name="_M_EvaluateDisplayStatus" Id="{6244459b-f95b-41a1-87b0-693fff1c4143}" FolderPath="Private\">
+    <Method Name="_M_EvaluateDisplayStatus" Id="{6244459b-f95b-41a1-87b0-693fff1c4143}" FolderPath="Methods\Private\">
       <Declaration><![CDATA[METHOD PRIVATE _M_EvaluateDisplayStatus : BOOL
 VAR_INPUT
 END_VAR
@@ -63,7 +65,7 @@ ELSIF State = E_PickerFixedState.Idle THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_DisablePicker" Id="{59639bde-73c8-4746-84a7-7c32addad53e}" FolderPath="Public\">
+    <Method Name="M_DisablePicker" Id="{59639bde-73c8-4746-84a7-7c32addad53e}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_DisablePicker : BOOL
 VAR_INPUT
 END_VAR
@@ -72,7 +74,7 @@ END_VAR
         <ST><![CDATA[Disable_Picker := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_EnablePicker" Id="{5a71c560-e7b1-426d-95ba-96abb84144a3}" FolderPath="Public\">
+    <Method Name="M_EnablePicker" Id="{5a71c560-e7b1-426d-95ba-96abb84144a3}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_EnablePicker : BOOL
 VAR_INPUT
 END_VAR
@@ -81,7 +83,7 @@ END_VAR
         <ST><![CDATA[Disable_Picker := FALSE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PickPart" Id="{508c54f0-ab18-44f7-b3fc-ce97a76918cf}" FolderPath="Public\">
+    <Method Name="M_PickPart" Id="{508c54f0-ab18-44f7-b3fc-ce97a76918cf}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_PickPart : BOOL
 VAR_INPUT
 END_VAR
@@ -107,7 +109,7 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PlacePart" Id="{ac36852f-3b3e-4b3c-ad85-4335c7f190aa}" FolderPath="Public\">
+    <Method Name="M_PlacePart" Id="{ac36852f-3b3e-4b3c-ad85-4335c7f190aa}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_PlacePart : BOOL
 VAR_INPUT
 END_VAR
@@ -132,7 +134,7 @@ IF  In_VacuumON THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_TargetBuffer_Is_1" Id="{182ef201-39af-4582-8ddf-e2fa923d81b9}" FolderPath="Public\Buffer Methods\">
+    <Method Name="M_TargetBuffer_Is_1" Id="{182ef201-39af-4582-8ddf-e2fa923d81b9}" FolderPath="Methods\Public\Buffer Methods\">
       <Declaration><![CDATA[METHOD M_TargetBuffer_Is_1 : BOOL
 VAR_INPUT
 END_VAR
@@ -142,7 +144,7 @@ END_VAR
 TargetBuffer_Is_2 := FALSE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_TargetBuffer_Is_2" Id="{a1848d1e-a972-4da5-85ac-2bdbac856f6b}" FolderPath="Public\Buffer Methods\">
+    <Method Name="M_TargetBuffer_Is_2" Id="{a1848d1e-a972-4da5-85ac-2bdbac856f6b}" FolderPath="Methods\Public\Buffer Methods\">
       <Declaration><![CDATA[METHOD M_TargetBuffer_Is_2 : BOOL
 VAR_INPUT
 END_VAR

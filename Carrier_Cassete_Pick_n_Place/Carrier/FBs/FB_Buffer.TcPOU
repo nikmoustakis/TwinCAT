@@ -4,31 +4,37 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Buffer
 
 VAR
-	BlankBuffer : ARRAY[1..GVL.Buffer_Size] OF BOOL; //
-	FullBuffer  : ARRAY[1..GVL.Buffer_Size] OF BOOL;
+	BlankBuffer : ARRAY[1..GVL.Buffer_Size] OF BOOL; //Empty Buffer (placeholder array used for comparison)
+	FullBuffer  : ARRAY[1..GVL.Buffer_Size] OF BOOL; //Full Buffer (placeholder array used for comparison)
 	
-	IsEmpty : BOOL;
-	IsFull  : BOOL;
+	IsEmpty 	: BOOL; //TRUE if Buffer EMPTY (all part slots available)
+	IsFull  	: BOOL; //TRUE if Buffer FULL (no available part slots)
 	
-	Init : BOOL := TRUE;
+	Init_Conf   : BOOL := TRUE; //Initialize Bit for Buffer Configuration
+	
+	TargetPosition_Buffer : INT;  // Position in X axis of Buffer 
 END_VAR
 
 
 VAR PERSISTENT
-	Places : ARRAY[1..GVL.Buffer_Size] OF BOOL;
+	Buffer_Slots : ARRAY[1..GVL.Buffer_Size] OF BOOL; (*Buffer Slots state; if ARRAY[Index] = TRUE there is part 
+																	  if ARRAY[Index] = FALSE part slot is empty *)
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF Init THEN 
-	MEMSET(ADR(FullBuffer),16#1,SIZEOF(FullBuffer)); //We want a FullBuffer to act as placeholder for comparison
-Init := FALSE;
+      <ST><![CDATA[IF Init_Conf THEN 
+	MEMSET(ADR(FullBuffer),16#1,SIZEOF(FullBuffer)); //FullBuffer has all slots TRUE; to be used to compare with actual Buffer Places
+Init_Conf := FALSE;
 END_IF
 
-IsEmpty := MEMCMP(ADR(BlankBuffer),ADR(PLACES),SIZEOF(BlankBuffer)) = 0; //TRUE if Buffer has zero parts (all slots are empty)
+IsEmpty := MEMCMP(ADR(BlankBuffer),ADR(Buffer_Slots),SIZEOF(BlankBuffer)) = 0; //TRUE if Buffer has zero parts (all slots are empty)
 
-IsFull := MEMCMP(ADR(FullBuffer),ADR(PLACES),SIZEOF(FullBuffer)) = 0;  //TRUE if Buffer is full (has zero available slots)]]></ST>
+IsFull := MEMCMP(ADR(FullBuffer),ADR(Buffer_Slots),SIZEOF(FullBuffer)) = 0;  //TRUE if Buffer is full (has zero available slots)]]></ST>
     </Implementation>
-    <Method Name="M_ClearBuffer" Id="{b6ac521c-be4d-46de-b385-0b949ba5f652}">
+    <Folder Name="Methods" Id="{8d888077-65c4-4b4a-aed3-5283654be573}">
+      <Folder Name="Public" Id="{8a8667d8-c502-46ba-9706-bd6556207911}" />
+    </Folder>
+    <Method Name="M_ClearBuffer" Id="{b6ac521c-be4d-46de-b385-0b949ba5f652}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_ClearBuffer : BOOL
 VAR_INPUT
 END_VAR
@@ -38,13 +44,13 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[
+        <ST><![CDATA[//Clears all Buffer Slots from parts 
 FOR i := 1 TO GVL.Buffer_Size DO 
-	Places[i] := FALSE;
+	Buffer_Slots[i] := FALSE;
 END_FOR]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Find_First_Empty_Pos" Id="{715b6a9c-f49c-4f6c-be8c-49094d2f2a8d}">
+    <Method Name="M_Find_First_Empty_Pos" Id="{715b6a9c-f49c-4f6c-be8c-49094d2f2a8d}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD PUBLIC M_Find_First_Empty_Pos : INT
 
 VAR 
@@ -52,8 +58,9 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 1 TO GVL.Buffer_Size DO
-    IF NOT Places[i] THEN
+        <ST><![CDATA[//If not zero, it outputs first available empty buffer slot
+FOR i := 1 TO GVL.Buffer_Size DO
+    IF NOT Buffer_Slots[i] THEN
         M_Find_First_Empty_Pos := i;
         RETURN;
     END_IF
@@ -61,7 +68,7 @@ END_FOR
 M_Find_First_Empty_Pos := 0;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Find_First_Occupied_Pos" Id="{868e29bc-331d-4a14-8fc5-450054de381a}">
+    <Method Name="M_Find_First_Occupied_Pos" Id="{868e29bc-331d-4a14-8fc5-450054de381a}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD PUBLIC M_Find_First_Occupied_Pos : INT
 
 VAR 
@@ -69,8 +76,9 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[FOR i := 1 TO GVL.Buffer_Size DO
-    IF  Places[i] THEN
+        <ST><![CDATA[//If not zero, it outputs first available occupied buffer slot
+FOR i := 1 TO GVL.Buffer_Size DO
+    IF  Buffer_Slots[i] THEN
         M_Find_First_Occupied_Pos := i;
         RETURN;
     END_IF
@@ -78,24 +86,56 @@ END_FOR
 M_Find_First_Occupied_Pos := 0;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PickPartFromBuffer" Id="{bfdb16f4-87e3-49fb-9c55-85ec6bdc087a}">
+    <Method Name="M_MoveToPos" Id="{087dacf1-2a88-46ec-a7b8-aaa5fdd635cc}" FolderPath="Methods\Public\">
+      <Declaration><![CDATA[METHOD M_MoveToPos : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// This call sends the desired X Buffer Coordinate for part pick/place for picker_2/picker_1 respectively
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_PickPartFromBuffer" Id="{bfdb16f4-87e3-49fb-9c55-85ec6bdc087a}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD PUBLIC M_PickPartFromBuffer : BOOL
 VAR_INPUT
 	Select_Index : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Places[Select_Index] := FALSE;]]></ST>
+        <ST><![CDATA[//Picker_2 is picking part from Buffer Slot at position Select_Index
+Buffer_Slots[Select_Index] := FALSE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_PlacePartInBuffer" Id="{8d6c9ac0-d716-45f6-ab80-315fa0726efc}">
+    <Method Name="M_PlacePartInBuffer" Id="{8d6c9ac0-d716-45f6-ab80-315fa0726efc}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_PlacePartInBuffer : BOOL
 VAR_INPUT
 	Select_Index : INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Places[Select_Index] := TRUE;]]></ST>
+        <ST><![CDATA[//Picker_1 is placing part in Buffer Slot at position Select_Index
+Buffer_Slots[Select_Index] := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="P_TargetPosition_Buffer" Id="{3afd0690-864f-4124-aa8d-b5d4766c332d}">
+      <Declaration><![CDATA[PROPERTY P_TargetPosition_Buffer : INT]]></Declaration>
+      <Get Name="Get" Id="{40849e13-26e8-4b49-ba4e-5a7ab56967e1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_TargetPosition_Buffer := TargetPosition_Buffer;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{9eef446b-52aa-4d24-8fe0-259a79833bb2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TargetPosition_Buffer := P_TargetPosition_Buffer;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <LineIds Name="FB_Buffer">
       <LineId Id="32" Count="0" />
       <LineId Id="15" Count="0" />
@@ -111,18 +151,33 @@ END_VAR]]></Declaration>
       <LineId Id="11" Count="1" />
     </LineIds>
     <LineIds Name="FB_Buffer.M_Find_First_Empty_Pos">
+      <LineId Id="33" Count="0" />
       <LineId Id="22" Count="5" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Buffer.M_Find_First_Occupied_Pos">
+      <LineId Id="17" Count="0" />
       <LineId Id="6" Count="5" />
       <LineId Id="5" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Buffer.M_MoveToPos">
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Buffer.M_PickPartFromBuffer">
+      <LineId Id="9" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Buffer.M_PlacePartInBuffer">
+      <LineId Id="9" Count="0" />
       <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Buffer.P_TargetPosition_Buffer.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Buffer.P_TargetPosition_Buffer.Set">
+      <LineId Id="2" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
