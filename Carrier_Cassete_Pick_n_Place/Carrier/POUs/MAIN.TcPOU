@@ -10,19 +10,22 @@ VAR
 	Picker_1                   : FB_Picker_1;
 	Picker_2                   : FB_Picker_2;
 	
-	ClearBuffer_1              : BOOL;
-	ClearBuffer_2              : BOOL;
+	ClearBuffer_1              : BOOL; // Clear Parts Buffer Slots from Buffer_1
+	ClearBuffer_2              : BOOL; // Clear Parts Buffer Slots from Buffer_2
 	
-	Disable_Picker_2 		   : BOOL;
-	Disable_Picker_1 		   : BOOL;
+	Disable_Picker_2 		   : BOOL; //If TRUE Picker_2 finishes current job and remains IDLE at Carrier_Pos (place part from Buffer)
+	Disable_Picker_1 		   : BOOL; //IF TRUE Picker_1 finished current job and remains IDLE at Cassette_Pos (pick new part)
 	
-	Serial_Number_Generator    : UDINT;
+	//Serial Part Number
+	Serial_Number_Generator    : UDINT; //Pseudo New Part Generator; creates Serial for every new part in the cassette
 	
-	New_Part_Serial_Number     : UDINT;     //New Part Serial Number in Cassette (picked from Cassette by Picker_1)
+	New_Part_Serial_Number     : UDINT; //New Part Serial Number in Cassette (picked from Cassette by Picker_1)
 	Carrier_Part_Serial_Number : UDINT; //Latest Carrier Part Serial Number (handed over to Carrier by Picker_2)
 	
-	New_Part_Ack               : BOOL;
 	
+	Clear_Serial_Number        : BOOL; //when TRUE reset Serial_Number_Generator to 0
+	
+	New_Part_Ack               : BOOL; //When TRUE Picker_1 acknowledges placing of new Part Serial Number on BufferSlot; Picker_2 resets it when picks part
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -226,6 +229,11 @@ ELSE
 	Picker_1.M_EnablePicker();
 END_IF
 
+IF Clear_Serial_Number THEN 
+	Serial_Number_Generator := 0;
+	Clear_Serial_Number := FALSE;
+END_IF
+
 New_Part_Serial_Number := Serial_Number_Generator; //Sim serial number for every new part]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
@@ -350,6 +358,11 @@ New_Part_Serial_Number := Serial_Number_Generator; //Sim serial number for every
       <LineId Id="395" Count="2" />
       <LineId Id="481" Count="1" />
       <LineId Id="394" Count="0" />
+      <LineId Id="571" Count="0" />
+      <LineId Id="570" Count="0" />
+      <LineId Id="572" Count="0" />
+      <LineId Id="574" Count="0" />
+      <LineId Id="573" Count="0" />
       <LineId Id="561" Count="0" />
       <LineId Id="560" Count="0" />
     </LineIds>

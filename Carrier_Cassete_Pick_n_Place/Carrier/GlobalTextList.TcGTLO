@@ -51,6 +51,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"50"</v>
+              <v n="TextDefault">"Clear Serial Nr"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"93"</v>
               <v n="TextDefault">"Disable "</v>
               <l n="LanguageTexts" t="ArrayList" />
