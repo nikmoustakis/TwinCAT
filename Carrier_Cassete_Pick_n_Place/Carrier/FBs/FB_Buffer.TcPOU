@@ -17,8 +17,10 @@ END_VAR
 
 
 VAR PERSISTENT
-	Buffer_Slots : ARRAY[1..GVL.Buffer_Size] OF BOOL; (*Buffer Slots state; if ARRAY[Index] = TRUE there is part 
-																	  if ARRAY[Index] = FALSE part slot is empty *)
+	Buffer_Slots        : ARRAY[1..GVL.Buffer_Size] OF BOOL; (*Buffer Slots state; if ARRAY[Index] = TRUE there is part 
+																	               if ARRAY[Index] = FALSE part slot is empty *)
+	Parts_Serial_Number : ARRAY[1..GVL.Buffer_Size] OF UDINT; (*Parts Serial Number; each part in Buffer is asociated with respective Serial Number
+																					tracked from casssete all way to the carrier *)
 END_VAR
 ]]></Declaration>
     <Implementation>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="Buffer_Slot" Id="{93877af8-fca6-4f82-9aba-fb25d245b4d7}">
+    <Declaration><![CDATA[TYPE Buffer_Slot :
+STRUCT
+	Slot_Full      : BOOL;   //If TRUE there is part in the Buffer Slot
+	Serial_Number   : UDINT; //Serial Number of Part in the Buffer Slot
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
