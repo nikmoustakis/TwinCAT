@@ -53,10 +53,10 @@ END_FOR]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Find_First_Empty_Pos" Id="{715b6a9c-f49c-4f6c-be8c-49094d2f2a8d}" FolderPath="Methods\Public\">
-      <Declaration><![CDATA[METHOD PUBLIC M_Find_First_Empty_Pos : INT
+      <Declaration><![CDATA[METHOD PUBLIC M_Find_First_Empty_Pos : UINT
 
 VAR 
-	 i : INT;
+	 i : UINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -71,10 +71,10 @@ M_Find_First_Empty_Pos := 0;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Find_First_Occupied_Pos" Id="{868e29bc-331d-4a14-8fc5-450054de381a}" FolderPath="Methods\Public\">
-      <Declaration><![CDATA[METHOD PUBLIC M_Find_First_Occupied_Pos : INT
+      <Declaration><![CDATA[METHOD PUBLIC M_Find_First_Occupied_Pos : UINT
 
 VAR 
-	 i : INT;
+	 i : UINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -100,13 +100,14 @@ END_VAR
       </Implementation>
     </Method>
     <Method Name="M_PickPartFromBuffer" Id="{bfdb16f4-87e3-49fb-9c55-85ec6bdc087a}" FolderPath="Methods\Public\">
-      <Declaration><![CDATA[METHOD PUBLIC M_PickPartFromBuffer : BOOL
+      <Declaration><![CDATA[METHOD PUBLIC M_PickPartFromBuffer : UDINT;
 VAR_INPUT
-	Select_Index : INT;
+	Select_Index : UINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//Picker_2 is picking part from Buffer Slot at position Select_Index
-Buffer_Slots[Select_Index] := FALSE;]]></ST>
+        <ST><![CDATA[Buffer_Slots[Select_Index] := FALSE; //Picker_2 is picking part from Buffer Slot at position Select_Index
+
+M_PickPartFromBuffer := Parts_Serial_Number[Select_Index]; //Method returns Part Serial Number in respective buffer slot]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_PlacePartInBuffer" Id="{8d6c9ac0-d716-45f6-ab80-315fa0726efc}" FolderPath="Methods\Public\">
@@ -170,8 +171,9 @@ END_VAR
       <LineId Id="6" Count="0" />
     </LineIds>
     <LineIds Name="FB_Buffer.M_PickPartFromBuffer">
-      <LineId Id="9" Count="0" />
       <LineId Id="5" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="13" Count="0" />
     </LineIds>
     <LineIds Name="FB_Buffer.M_PlacePartInBuffer">
       <LineId Id="9" Count="0" />

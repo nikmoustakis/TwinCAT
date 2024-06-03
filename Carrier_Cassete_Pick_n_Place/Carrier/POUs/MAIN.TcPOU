@@ -4,23 +4,24 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	
-    Buffer_1 : FB_Buffer;
-    Buffer_2 : FB_Buffer;
+    Buffer_1                   : FB_Buffer;
+    Buffer_2                   : FB_Buffer;
 	
-	Picker_1  : FB_Picker_1;
-	Picker_2  : FB_Picker_2;
+	Picker_1                   : FB_Picker_1;
+	Picker_2                   : FB_Picker_2;
 	
-	ClearBuffer_1 : BOOL;
-	ClearBuffer_2 : BOOL;
+	ClearBuffer_1              : BOOL;
+	ClearBuffer_2              : BOOL;
 	
-	Disable_Picker_2 : BOOL;
-	Disable_Picker_1 : BOOL;
+	Disable_Picker_2 		   : BOOL;
+	Disable_Picker_1 		   : BOOL;
 	
-	Serial_Number_Generator : UDINT;
+	Serial_Number_Generator    : UDINT;
 	
-	New_Part_Serial_Number : UDINT;
+	New_Part_Serial_Number     : UDINT;     //New Part Serial Number in Cassette (picked from Cassette by Picker_1)
+	Carrier_Part_Serial_Number : UDINT; //Latest Carrier Part Serial Number (handed over to Carrier by Picker_2)
 	
-	New_Part_Ack : BOOL;
+	New_Part_Ack               : BOOL;
 	
 END_VAR
 ]]></Declaration>
@@ -163,6 +164,7 @@ CASE Picker_2.State OF
 		
 		END_IF
 		
+		Carrier_Part_Serial_Number := Picker_2.Part_SerialNumber;
 		
 	E_PickerFixedState.InPickedPos:
 		Picker_2.M_PickPart();
@@ -172,12 +174,14 @@ CASE Picker_2.State OF
 				
 		
 		
-		IF Picker_2.TargetBuffer_Is_1 THEN 
-			Buffer_1.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer);
-		ELSE 
-			Buffer_2.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer);
-		END_IF
+//		IF Picker_2.TargetBuffer_Is_1 THEN 
+//			Picker_2.P_Part_SerialNumber :=  Buffer_1.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer);
+			
+//		ELSE 
+//			Picker_2.P_Part_SerialNumber := Buffer_2.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer);
+//		END_IF
 	
+		Picker_2.P_Part_SerialNumber := SEL(Picker_2.TargetBuffer_Is_1,Buffer_2.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer),Buffer_1.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer));
 	
 		Picker_2.M_MoveToPlacePos();
 			
@@ -304,14 +308,20 @@ New_Part_Serial_Number := Serial_Number_Generator; //Sim serial number for every
       <LineId Id="352" Count="0" />
       <LineId Id="350" Count="1" />
       <LineId Id="342" Count="0" />
-      <LineId Id="371" Count="3" />
+      <LineId Id="371" Count="1" />
+      <LineId Id="565" Count="0" />
+      <LineId Id="373" Count="1" />
       <LineId Id="388" Count="0" />
       <LineId Id="375" Count="1" />
       <LineId Id="447" Count="0" />
       <LineId Id="529" Count="0" />
       <LineId Id="522" Count="0" />
-      <LineId Id="448" Count="3" />
-      <LineId Id="444" Count="2" />
+      <LineId Id="448" Count="1" />
+      <LineId Id="562" Count="0" />
+      <LineId Id="450" Count="1" />
+      <LineId Id="444" Count="1" />
+      <LineId Id="563" Count="0" />
+      <LineId Id="446" Count="0" />
       <LineId Id="377" Count="2" />
       <LineId Id="483" Count="0" />
       <LineId Id="485" Count="3" />

@@ -66,6 +66,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"400"</v>
+              <v n="TextDefault">"Latest Part Serial Number"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"477"</v>
               <v n="TextDefault">"Mover 1"</v>
               <l n="LanguageTexts" t="ArrayList" />

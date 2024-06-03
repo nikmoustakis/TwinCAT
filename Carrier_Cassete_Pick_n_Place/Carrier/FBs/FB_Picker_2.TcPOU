@@ -3,6 +3,9 @@
   <POU Name="FB_Picker_2" Id="{ae141df9-b1af-4fb5-8cce-8c6c54822038}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Picker_2 EXTENDS FB_Picker
 
+VAR
+	Part_SerialNumber : UDINT;
+END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^(); 
@@ -76,7 +79,7 @@ END_IF
       <Declaration><![CDATA[METHOD M_MoveToPickPos : BOOL
 VAR_INPUT
 	Buffer_1_InUse : BOOL;
-	Buffer_Pos : INT;
+	Buffer_Pos : UINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[
@@ -101,6 +104,25 @@ IF Sim_Time.Q THEN   //We assume in 1 seconds we go to Pick position; BufferPos 
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Property Name="P_Part_SerialNumber" Id="{ae847632-fe81-4a9d-856f-a00eaff5737c}">
+      <Declaration><![CDATA[PROPERTY P_Part_SerialNumber : UDINT]]></Declaration>
+      <Get Name="Get" Id="{1505fc5f-c74f-4756-ba76-5d10adfa368c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Part_SerialNumber := Part_SerialNumber;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{6b856da8-e3b0-4e3d-aa76-69d02952fba2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Part_SerialNumber := P_Part_SerialNumber;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <LineIds Name="FB_Picker_2">
       <LineId Id="9" Count="0" />
       <LineId Id="18" Count="0" />
@@ -139,6 +161,12 @@ END_IF]]></ST>
     <LineIds Name="FB_Picker_2.M_MoveToPlacePos">
       <LineId Id="20" Count="5" />
       <LineId Id="16" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker_2.P_Part_SerialNumber.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker_2.P_Part_SerialNumber.Set">
+      <LineId Id="2" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

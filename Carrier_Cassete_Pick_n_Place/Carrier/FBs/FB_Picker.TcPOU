@@ -8,32 +8,32 @@ VAR_OUTPUT
 END_VAR
 VAR
 	//Mover State
-	State            : INT; (*Current State of Picker (
+	State                 : INT; (*Current State of Picker (
 								Idle        := 0,
 								InPickedPos := 1,
 								PartPicked 	:= 2,
 								InPlacedPos := 3,
 								PartPlaced  := 4*)
 	
-	StatusDisp       : STRING;
-	
-	//Inputs
-	In_VacuumON      : BOOL; //When True means part is detected in vacuum
-	
-	//Outputs
-	Out_Vacuum       : BOOL; //Becomes TRUE to pick part
-	Out_Blower       : BOOL; //Becomes TRUE to put part
+	StatusDisp       	  : STRING;
+	                 		
+	//Inputs         		
+	In_VacuumON      	  : BOOL; //When True means part is detected in vacuum
+	                 		
+	//Outputs        		
+	Out_Vacuum       	  : BOOL; //Becomes TRUE to pick part
+	Out_Blower       	  : BOOL; //Becomes TRUE to put part
 	
 	//Simulation Timer 
-	Sim_Time          : TON ;   //Used to simulate feedback for each state to be riched i.e. time it takes to pick/place
+	Sim_Time              : TON ;   //Used to simulate feedback for each state to be riched i.e. time it takes to pick/place
 	
-	TargetBuffer_Is_1 : BOOL;   // Picker is going to use Buffer 1
-	TargetBuffer_Is_2 : BOOL;   // Picker is going to use Buffer 2
+	TargetBuffer_Is_1     : BOOL;   // Picker is going to use Buffer 1
+	TargetBuffer_Is_2     : BOOL;   // Picker is going to use Buffer 2
 	TargetPosition_Buffer : UINT;  // Position in y axis of Buffer 
 	
-	Picker_PosY_VISU_Sim : INT; //Position of Picker in Y position simulating Picker in Y position
+	Picker_PosY_VISU_Sim  : INT; //Position of Picker in Y position simulating Picker in Y position
 	
-	Disable_Picker : BOOL;
+	Disable_Picker        : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
