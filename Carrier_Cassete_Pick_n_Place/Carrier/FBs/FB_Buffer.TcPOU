@@ -61,7 +61,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[//If not zero, it outputs first available empty buffer slot
-FOR i := 1 TO GVL.Buffer_Size DO
+FOR i := GVL.Buffer_Size TO 1 BY -1 DO
     IF NOT Buffer_Slots[i] THEN
         M_Find_First_Empty_Pos := i;
         RETURN;

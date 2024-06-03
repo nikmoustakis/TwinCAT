@@ -8701,7 +8701,7 @@
                   <v>OnMouseDown</v>
                   <a cet="STSnippetInputAction">
                     <o>
-                      <v n="STSnippet">"Main.ClearBuffer_1 := TRUE;"</v>
+                      <v n="STSnippet">"Main.Clear_Serial_Number := TRUE;"</v>
                     </o>
                   </a>
                 </d>
