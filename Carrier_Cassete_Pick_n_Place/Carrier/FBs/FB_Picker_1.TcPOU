@@ -96,8 +96,8 @@ END_IF
     <Method Name="M_MoveToPlacePos" Id="{2e459992-cfe1-4ff9-ad47-0e875ce65f90}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_MoveToPlacePos : BOOL
 VAR_INPUT
-	Buffer_1_InUse : BOOL;
-	Buffer_Pos : INT;
+	Buffer_1_InUse : BOOL; //TRUE If Buffer_1 is Used, FALSE if Buffer_2 is Used by the Picker
+	Buffer_Pos : UINT;     // Dictates the Buffer Slot the place handover takes place
 END_VAR
 ]]></Declaration>
       <Implementation>
