@@ -75,7 +75,7 @@ END_IF
 New_Part_Serial_Number := Serial_Number_Generator; //Sim serial number for every new part]]></ST>
     </Implementation>
     <Method Name="_M_Sequence_Picker1" Id="{9926135b-7636-49db-b507-9346eabc7531}">
-      <Declaration><![CDATA[METHOD PUBLIC _M_Sequence_Picker1 : BOOL
+      <Declaration><![CDATA[METHOD PRIVATE _M_Sequence_Picker1 : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -161,7 +161,7 @@ END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="_M_Sequence_Picker2" Id="{64727e4b-e6d8-46c2-b472-ad2dd94096ca}">
-      <Declaration><![CDATA[METHOD PUBLIC _M_Sequence_Picker2 : BOOL
+      <Declaration><![CDATA[METHOD PRIVATE _M_Sequence_Picker2 : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -225,14 +225,6 @@ END_VAR
 			
 	E_PickerFixedState.PartPicked:
 				
-		
-		
-//		IF Picker_2.TargetBuffer_Is_1 THEN 
-//			Picker_2.P_Part_SerialNumber :=  Buffer_1.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer);
-			
-//		ELSE 
-//			Picker_2.P_Part_SerialNumber := Buffer_2.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer);
-//		END_IF
 	
 		Picker_2.P_Part_SerialNumber := SEL(Picker_2.TargetBuffer_Is_1,Buffer_2.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer),Buffer_1.M_PickPartFromBuffer(Picker_2.TargetPosition_Buffer));
 	
@@ -297,7 +289,8 @@ END_CASE]]></ST>
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="MAIN._M_Sequence_Picker2">
-      <LineId Id="9" Count="85" />
+      <LineId Id="9" Count="58" />
+      <LineId Id="76" Count="18" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
