@@ -13,6 +13,8 @@ VAR
 	Init_Conf   : BOOL := TRUE; //Initialize Bit for Buffer Configuration
 	
 	TargetPosition_Buffer : INT;  // Position in X axis of Buffer 
+	
+	Buffer_Is_InPos : BOOL;
 END_VAR
 
 
@@ -34,8 +36,30 @@ IsEmpty := MEMCMP(ADR(BlankBuffer),ADR(Buffer_Slots),SIZEOF(BlankBuffer)) = 0; /
 IsFull := MEMCMP(ADR(FullBuffer),ADR(Buffer_Slots),SIZEOF(FullBuffer)) = 0;  //TRUE if Buffer is full (has zero available slots)]]></ST>
     </Implementation>
     <Folder Name="Methods" Id="{8d888077-65c4-4b4a-aed3-5283654be573}">
+      <Folder Name="Private" Id="{2fa1f6e7-b8f9-433d-859d-f49ff1829b23}" />
       <Folder Name="Public" Id="{8a8667d8-c502-46ba-9706-bd6556207911}" />
     </Folder>
+    <Method Name="_M_MoveToPos" Id="{f36c44a3-c586-4638-b453-35afb20f6852}" FolderPath="Methods\Private\">
+      <Declaration><![CDATA[METHOD PRIVATE _M_MoveToPos : BOOL
+VAR_INPUT
+	Select_Index       : UINT;
+END_VAR
+
+VAR_INST
+	Sim_Time : TON;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//When called we assume the buffer moves to X part slot for pick/place
+
+Sim_Time(IN := TRUE, PT := T#1S);
+Buffer_Is_InPos := FALSE;
+IF Sim_Time.Q THEN       //We assume in 1 seconds we go to desired X Buffer Slot Pos
+	Sim_Time(IN := FALSE);
+	Buffer_Is_InPos := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_ClearBuffer" Id="{b6ac521c-be4d-46de-b385-0b949ba5f652}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_ClearBuffer : BOOL
 VAR_INPUT
@@ -64,6 +88,7 @@ END_VAR
 FOR i := GVL.Buffer_Size TO 1 BY -1 DO
     IF NOT Buffer_Slots[i] THEN
         M_Find_First_Empty_Pos := i;
+		_M_MoveToPos(i); //Buffer Gots to Respective X Buffer Part Slot
         RETURN;
     END_IF
 END_FOR
@@ -82,6 +107,7 @@ END_VAR
 FOR i := 1 TO GVL.Buffer_Size DO
     IF  Buffer_Slots[i] THEN
         M_Find_First_Occupied_Pos := i;
+		_M_MoveToPos(i); //Buffer Gots to Respective X Buffer Part Slot
         RETURN;
     END_IF
 END_FOR
@@ -150,6 +176,11 @@ END_VAR
       <LineId Id="37" Count="0" />
       <LineId Id="36" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Buffer._M_MoveToPos">
+      <LineId Id="20" Count="1" />
+      <LineId Id="11" Count="4" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Buffer.M_ClearBuffer">
       <LineId Id="6" Count="0" />
       <LineId Id="5" Count="0" />
@@ -157,12 +188,16 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_Buffer.M_Find_First_Empty_Pos">
       <LineId Id="33" Count="0" />
-      <LineId Id="22" Count="5" />
+      <LineId Id="22" Count="2" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="25" Count="2" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Buffer.M_Find_First_Occupied_Pos">
       <LineId Id="17" Count="0" />
-      <LineId Id="6" Count="5" />
+      <LineId Id="6" Count="2" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="9" Count="2" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Buffer.M_MoveToPos">

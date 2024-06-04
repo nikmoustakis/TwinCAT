@@ -52,7 +52,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF State = E_PickerFixedState.PartPicked THEN 
+        <ST><![CDATA[//Picker Status displayed on VISU
+
+IF State = E_PickerFixedState.PartPicked THEN 
 	StatusDisp := 'Part Picked';
 ELSIF State = E_PickerFixedState.PartPlaced THEN 
 	StatusDisp := 'Part Placed';
@@ -71,7 +73,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Disable_Picker := TRUE;]]></ST>
+        <ST><![CDATA[Disable_Picker := TRUE; //When TRUE the Picker finishes current job and stays at Picked/Placed Position (Picker_1/Picker_2) Idle]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_EnablePicker" Id="{5a71c560-e7b1-426d-95ba-96abb84144a3}" FolderPath="Methods\Public\">
@@ -80,7 +82,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Disable_Picker := FALSE;]]></ST>
+        <ST><![CDATA[Disable_Picker := FALSE; //If FALSE the Picker resumes the pick/place sequence]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_PickPart" Id="{508c54f0-ab18-44f7-b3fc-ce97a76918cf}" FolderPath="Methods\Public\">
@@ -89,7 +91,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Out_Blower := FALSE;
+        <ST><![CDATA[Out_Blower := FALSE; //Vacuum is TRUE to pick the part
 Out_Vacuum := TRUE;
 
 Sim_Time(IN := Out_Vacuum, PT := T#500MS);
@@ -116,7 +118,7 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Out_Blower := TRUE;
+        <ST><![CDATA[Out_Blower := TRUE;   //Blowet is TRUE to place the part 
 Out_Vacuum := FALSE;
 
 Sim_Time(IN :=  Out_Blower, PT := T#500MS);
@@ -135,7 +137,7 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_TargetBuffer_Is_1" Id="{182ef201-39af-4582-8ddf-e2fa923d81b9}" FolderPath="Methods\Public\Buffer Methods\">
-      <Declaration><![CDATA[METHOD M_TargetBuffer_Is_1 : BOOL
+      <Declaration><![CDATA[METHOD M_TargetBuffer_Is_1 : BOOL //Picker uses Buffer_1
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -145,7 +147,7 @@ TargetBuffer_Is_2 := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_TargetBuffer_Is_2" Id="{a1848d1e-a972-4da5-85ac-2bdbac856f6b}" FolderPath="Methods\Public\Buffer Methods\">
-      <Declaration><![CDATA[METHOD M_TargetBuffer_Is_2 : BOOL
+      <Declaration><![CDATA[METHOD M_TargetBuffer_Is_2 : BOOL //Picker uses Buffer_2
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -178,6 +180,7 @@ END_VAR
       <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_Picker._M_EvaluateDisplayStatus">
+      <LineId Id="19" Count="1" />
       <LineId Id="5" Count="1" />
       <LineId Id="8" Count="1" />
       <LineId Id="11" Count="0" />

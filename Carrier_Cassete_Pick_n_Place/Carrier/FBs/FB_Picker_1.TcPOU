@@ -20,7 +20,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF TargetBuffer_Is_1 AND ((State = E_PickerFixedState.InPlacedPos) OR  (State = E_PickerFixedState.PartPlaced)) THEN 
+        <ST><![CDATA[//Used to simulate Picker Y position on VISU based on pixel Y position and Picker State
+
+IF TargetBuffer_Is_1 AND ((State = E_PickerFixedState.InPlacedPos) OR  (State = E_PickerFixedState.PartPlaced)) THEN 
 	IF (TargetPosition_Buffer = 1 ) OR (TargetPosition_Buffer = 7 ) THEN 
 		Picker_PosY_VISU_Sim := 2238 -530;
 	ELSIF (TargetPosition_Buffer = 2 ) OR (TargetPosition_Buffer = 8) THEN	
@@ -119,6 +121,7 @@ END_IF]]></ST>
       <LineId Id="17" Count="0" />
     </LineIds>
     <LineIds Name="FB_Picker_1._M_Picker_PosY_VISU">
+      <LineId Id="53" Count="1" />
       <LineId Id="12" Count="0" />
       <LineId Id="15" Count="0" />
       <LineId Id="19" Count="0" />
