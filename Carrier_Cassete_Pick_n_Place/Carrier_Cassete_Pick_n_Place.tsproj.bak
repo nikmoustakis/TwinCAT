@@ -10,7 +10,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{715FDEB3-EE28-46EC-87F8-DE5DF5B44E74}" Name="Carrier" PrjFilePath="Carrier\Carrier.plcproj" TmcFilePath="Carrier\Carrier.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Carrier\Carrier.tmc" TmcHash="{4826572B-8F4C-00F2-8CF8-4AA5D81AAC93}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Carrier\Carrier.tmc" TmcHash="{ABF6F922-BC66-E20D-8918-CC73E55443D0}">
 					<Name>Carrier Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

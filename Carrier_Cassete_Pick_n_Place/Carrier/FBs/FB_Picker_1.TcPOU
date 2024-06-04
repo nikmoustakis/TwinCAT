@@ -60,22 +60,6 @@ END_IF
 //TargetPosition_Buffer]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_IdleState" Id="{21afa249-8f81-49d8-a84e-c6946593c4c5}" FolderPath="Methods\Public\">
-      <Declaration><![CDATA[METHOD M_IdleState : BOOL
-VAR_INPUT
-END_VAR
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[
-IF Disable_Picker THEN 
-	State := E_PickerFixedState.Idle;
-END_IF
-
-
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_MoveToPickPos" Id="{f64fc3ca-7148-49e5-9864-e4dee441f6e8}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_MoveToPickPos : BOOL
 VAR_INPUT
@@ -84,7 +68,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[
-Sim_Time(IN := TRUE, PT := T#1S);
+Sim_Time(IN := TRUE, PT := T#400mS);
 
 IF Sim_Time.Q THEN       //We assume in 1 seconds we go to Pick position; CassettePos for Mover1, BufferPos for Mover2
 	Sim_Time(IN := FALSE);
@@ -107,7 +91,7 @@ END_VAR
 //State := E_MoverTransitionState.Placing;
 
 
-Sim_Time(IN := TRUE, PT := T#1S);
+Sim_Time(IN := TRUE, PT := T#400MS);
 
 IF Sim_Time.Q THEN   //We assume in 1 seconds we go to Pick position; BufferPos for Mover1, CarrierPos for Mover2
 	Sim_Time(IN := FALSE);
@@ -137,12 +121,6 @@ END_IF]]></ST>
       <LineId Id="5" Count="0" />
       <LineId Id="17" Count="1" />
       <LineId Id="16" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Picker_1.M_IdleState">
-      <LineId Id="17" Count="0" />
-      <LineId Id="19" Count="2" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="27" Count="0" />
     </LineIds>
     <LineIds Name="FB_Picker_1.M_MoveToPickPos">
       <LineId Id="17" Count="0" />

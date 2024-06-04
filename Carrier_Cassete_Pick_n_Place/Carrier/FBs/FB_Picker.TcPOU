@@ -85,6 +85,22 @@ END_VAR
         <ST><![CDATA[Disable_Picker := FALSE; //If FALSE the Picker resumes the pick/place sequence]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_IdleState" Id="{8f030c80-b3a1-4374-8393-7c087137ff8a}" FolderPath="Methods\Public\">
+      <Declaration><![CDATA[METHOD M_IdleState : BOOL
+VAR_INPUT
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF Disable_Picker THEN //If Disable Request is Active Picker gets to IDLE state
+	State := E_PickerFixedState.Idle;
+END_IF
+
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_PickPart" Id="{508c54f0-ab18-44f7-b3fc-ce97a76918cf}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_PickPart : BOOL
 VAR_INPUT
@@ -196,6 +212,12 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_Picker.M_EnablePicker">
       <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Picker.M_IdleState">
+      <LineId Id="17" Count="0" />
+      <LineId Id="19" Count="2" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="27" Count="0" />
     </LineIds>
     <LineIds Name="FB_Picker.M_PickPart">
       <LineId Id="14" Count="0" />

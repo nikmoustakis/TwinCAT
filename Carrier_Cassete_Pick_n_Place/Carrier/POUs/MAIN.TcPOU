@@ -37,37 +37,37 @@ Picker_1();
 Picker_2();
 
 
-_M_Sequence_Picker1();
-_M_Sequence_Picker2();
+_M_Sequence_Picker1(); // Run Picker_1 Pick from Cassette & Place to Buffer_1/Buffer_2 Sequence
+_M_Sequence_Picker2(); // Run Picker_2 Pick from Availble Buffer_1/Buffer_2 Slot & Place to Carrier
 
 
 
 
 
-IF ClearBuffer_1 THEN 
+IF ClearBuffer_1 THEN        //if TRUE it empties all Buffer_1 Part Slots
 	Buffer_1.M_ClearBuffer();
 	ClearBuffer_1 := FALSE;
 END_IF
 
 
-IF ClearBuffer_2 THEN 
+IF ClearBuffer_2 THEN      // if TRUE it empties all Buffer_2 Part Slots
 	Buffer_2.M_ClearBuffer();
 	ClearBuffer_2 := FALSE;
 END_IF
 
-IF Disable_Picker_2 THEN 
+IF Disable_Picker_2 THEN  //If TRUE Picker_2 finishes current job and remains IDLE at Carrier
 	Picker_2.M_DisablePicker();
 ELSE
 	Picker_2.M_EnablePicker();
 END_IF
 
-IF Disable_Picker_1 THEN 
+IF Disable_Picker_1 THEN //If TRUE Picker_1 finishes current job and remains IDLE at Cassette
 	Picker_1.M_DisablePicker();
 ELSE
 	Picker_1.M_EnablePicker();
 END_IF
 
-IF Clear_Serial_Number THEN 
+IF Clear_Serial_Number THEN //If TRUE it resets Serial Part Generator to 0
 	Serial_Number_Generator := 0;
 	Clear_Serial_Number := FALSE;
 END_IF

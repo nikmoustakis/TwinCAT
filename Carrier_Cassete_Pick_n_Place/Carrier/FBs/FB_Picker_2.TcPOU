@@ -60,21 +60,6 @@ END_IF
 //TargetPosition_Buffer]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_IdleState" Id="{98032586-1c78-4b63-9123-87e33f5ee76a}" FolderPath="Methods\Public\">
-      <Declaration><![CDATA[METHOD M_IdleState : BOOL
-VAR_INPUT
-END_VAR
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF Disable_Picker THEN 
-	State := E_PickerFixedState.Idle; //If Picker is 
-END_IF
-
-
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_MoveToPickPos" Id="{e258428f-1e1d-4ad3-a463-236cc2a4631c}" FolderPath="Methods\Public\">
       <Declaration><![CDATA[METHOD M_MoveToPickPos : BOOL
 VAR_INPUT
@@ -144,11 +129,6 @@ END_VAR
       <LineId Id="5" Count="0" />
       <LineId Id="17" Count="1" />
       <LineId Id="16" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Picker_2.M_IdleState">
-      <LineId Id="19" Count="2" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="27" Count="0" />
     </LineIds>
     <LineIds Name="FB_Picker_2.M_MoveToPickPos">
       <LineId Id="17" Count="0" />
